@@ -1,0 +1,67 @@
+:root {
+    /* Cor de destaque (roxo Premium) */
+    --roxo: #38208C;
+    /* Tons de cinza */
+    --cinza-claro: #BFBFBF;
+    --cinza-medio: #737373;
+    --cinza-escuro: #404040;
+    /* Azul / Primary do Bootstrap */
+    --primary: #0d6efd;
+    /* Fonte principal do site */
+    --font-base: 'Poppins', sans-serif;
+    /* Fontes alternativas */
+    --font-titles: 'Poppins', sans-serif;
+    /* Tamanhos padrão */
+    --font-size-base: 1rem;
+    --font-size-title: 2rem;
+    /* H`s a mais*/
+    /*Definição*/
+    --h7: 1rem;
+    --h8: .95rem;
+    --h9: .9rem;
+    --h10: .85rem;
+    --h11: .8rem;
+    --h12: .75rem;
+    /*Atribuição*/
+    .h7 {
+        font-size: var(--h7);
+    }
+
+    .h8 {
+        font-size: var(--h8);
+    }
+
+    .h9 {
+        font-size: var(--h9);
+    }
+
+    .h10 {
+        font-size: var(--h10);
+    }
+
+    .h11 {
+        font-size: var(--h11);
+    }
+
+    .h12 {
+        font-size: var(--h12);
+    }
+}
+
+body {
+    /* Cinza claro para contraste com cards brancos */
+    background-color: #E0E0E0;
+    /* Fonte padrão aplicada ao site todo */
+    font-family: var(--font-base);
+    font-size: var(--font-size-base);
+}
+
+.QuebraTela {
+    padding-top: 9em;
+}
+
+@media (max-width: 768px) {
+    ImgCarroseu {
+        height: 60vh;
+    }
+}

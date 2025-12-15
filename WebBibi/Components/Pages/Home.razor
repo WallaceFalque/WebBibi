@@ -1,0 +1,223 @@
+﻿@page "/"
+@using WebBibi.Models
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+@* Carroseu *@
+<div id="carouselHero"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     data-bs-interval="5000"
+     data-bs-pause="false">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img class="w-100 ImgCarroseu"
+                 style="height: 85vh; object-fit: cover;"
+                 src="https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg">
+            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
+                <h1 class="fw-bold display-4 mb-3">Performance e luxo</h1>
+                <p class="h8 mb-4">Veículos selecionados para quem exige mais.</p>
+                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Descobrir lançamentos</button>
+            </div>
+            
+        </div>
+
+         <div class="carousel-item">
+            <img class="w-100 ImgCarroseu"
+                 style="height: 85vh; object-fit: cover;"
+                 src="https://images.pexels.com/photos/3972753/pexels-photo-3972753.jpeg">
+            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
+                <h1 class="fw-bold display-4 mb-3">Precisão que você sente</h1>
+                <p class="h8 mb-4">Engenharia, conforto e resposta imediata.Engenharia, conforto e resposta imediata.</p>
+                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Conhecer os diferenciais</button>
+            </div>
+
+        </div>
+
+        <div class="carousel-item">
+            <img class="w-100 ImgCarroseu"
+                 style="height: 85vh; object-fit: cover;"
+                 src="https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg">
+            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
+                <h1 class="fw-bold display-4 mb-3">Seu próximo destino começa aqui</h1>
+                <p class="h8 mb-4">Mais do que um carro, uma experiência.</p>
+                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolde px-4 col-md-4 col-sm-6 py-3">Ver modelos disponíveis</button>
+            </div>
+        </div> 
+        <div class="carousel-item">
+            <img class="w-100 ImgCarroseu"
+                 style="height: 85vh; object-fit: cover;"
+                 src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg">
+            <div class="carousel-caption text-start d-flex flex-column" style="top:10em;">
+                <h1 class="fw-bold display-4 mb-3">O luxo não chama atenção. Ele se impõe.</h1>
+                <p class="h8 mb-4">Design, conforto e presença em cada escolha.</p>
+                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Conhecer a linha premium</button>
+            </div>
+        </div> 
+
+    </div>
+</div>
+
+<section class="QuebraTela"></section>
+
+@* Conteudo da pagina *@
+<section class="mx-auto" style="width:95%;">
+@*  Acabaram de chegar *@
+<h4 class="pb-5 d-flex" style="color: var(--roxo);">Alguns de nossos modelos </h4>
+
+    <div class="d-flex flex-wrap mx-auto gap-5 justify-content-center">
+   
+    @foreach (var veiculo in VeiculosFake)
+        {
+            <div class="col-12 col-sm-6 col-md-auto">
+                <CardNovosItens Veiculo="veiculo" />
+            </div>
+        }
+    </div>
+
+    <section class="QuebraTela"></section>   
+    
+@* Nossas marcas *@
+@* Futuramente fazer a pagina de ficha com filtro pra cada marca *@  
+<section class="w-75 w-sm-100 mx-auto">
+    <h4 class="pb-5" style="color: var(--roxo)">Algumas das marcas que trabalhamos</h4>
+    <div id="logosCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <div class="row text-center justify-content-center g-4">
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/200" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Ferrari</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/201" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">BMW</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/202" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Audi</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/203" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Lexus</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/204" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Mercedes</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/205" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Porsche</h6>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row text-center justify-content-center g-4">
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/210" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);"v>Toyota</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/211" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Honda</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/212" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Nissan</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/213" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);"v>Volvo</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/214" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Kia</h6>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-2">
+                        <img src="https://picsum.photos/215" class="img-fluid rounded-circle border border-secondary p-1">
+                        <h6 class="fw-bold mt-2" style="color: var(--roxo);">Hyundai</h6>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#logosCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#logosCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+
+    </div>
+
+</section>
+
+<section class="QuebraTela"></section>
+
+</section>
+@code {
+    private List<VeiculoCardDTO> VeiculosFake = new();
+
+    protected override void OnInitialized()
+    {
+        VeiculosFake = new List<VeiculoCardDTO>
+        {
+            new VeiculoCardDTO
+            {
+                ImagemUrl = "/Img/Img-Teste.jpg",
+                Titulo = "Renault Kardian",
+                Versao = "Kardian Techno (Aut)",
+                Cambio = "Automático",
+                Preco = "R$ 99.590,00",
+                Ano = "2024/2025",
+                Quilometragem = "43.264 Km",
+                Localizacao = "Rio de Janeiro, RJ"
+            },
+            new VeiculoCardDTO
+            {
+                ImagemUrl = "/Img/Img-Teste.jpg",
+                Titulo = "Jeep Compass",
+                Versao = "Longitude T270",
+                Cambio = "Automático",
+                Preco = "R$ 149.900,00",
+                Ano = "2023/2024",
+                Quilometragem = "21.000 Km",
+                Localizacao = "São Paulo, SP"
+            },
+            new VeiculoCardDTO
+            {
+                ImagemUrl = "/Img/Img-Teste.jpg",
+                Titulo = "Toyota Corolla",
+                Versao = "XEi 2.0",
+                Cambio = "Automático",
+                Preco = "R$ 135.000,00",
+                Ano = "2022/2023",
+                Quilometragem = "35.800 Km",
+                Localizacao = "Belo Horizonte, MG"
+            }
+        };
+    }
+}

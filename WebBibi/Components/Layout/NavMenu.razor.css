@@ -1,0 +1,44 @@
+/* Mobile – empurra menu e hambúrguer totalmente para a direita */
+@media (max-width: 992px) {
+    .nav-mobile-control {
+        justify-content: end !important;
+        text-align: right;
+    }
+
+    /* Empurra o botão hamburguer pra direita também */
+    .navbar-toggler {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Dropdown ocupando a tela inteira no mobile */
+    .navbar .dropdown-menu {
+        position: static !important;
+        width: 100vw !important; 
+        left: 0 !important;
+        transform: none !important; 
+        border-radius: 0 !important; 
+        border: none !important;
+    }
+}
+
+/*Espaçamento entre os itens*/
+.dropdown-item {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+
+/*Alinhador dropdown*/
+.dropdown-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .dropdown-menu .dropdown-item i {
+        width: 28px; 
+        text-align: center; 
+    }
+

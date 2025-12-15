@@ -1,0 +1,80 @@
+﻿@rendermode InteractiveServer
+
+<style>
+    .ImgNovosControl {
+        max-width: 26em;
+        height: auto;
+    }  
+</style>
+
+<section class="card-veiculo bg-white rounded-5 shadow-sm overflow-hidden">
+
+    <img src="@Veiculo.ImagemUrl" class="d-fle ImgNovosControl mx-auto" alt="@Veiculo.Titulo">
+
+    <div class="p-4">
+
+        <div class="d-flex justify-content-between align-items-start mb-2">
+            <div>
+                <h2 class="h7 fw-semibold mb-0">
+                    @Veiculo.Titulo
+                </h2>
+ 
+                <span class="h10 text-muted d-block">
+                    @Veiculo.Versao
+                </span>
+
+                <span class="h11 text-muted d-block">
+                    @Veiculo.Cambio
+                </span>
+            </div>
+
+            <a href="#" @onclick="BtnClicado" class="text-decoration-none">
+                @if (!isClicked)
+                {
+                    <i class="bi bi-heart fs-4" style="color: var(--roxo);"></i>
+                }        
+                else
+                {
+                    <i class="bi bi-suit-heart-fill fs-4" style="color: var(--roxo);"></i>
+                }
+            </a>
+        </div>
+
+        <hr>
+
+        <div class="h7 fw-semibold mb-1">
+            @Veiculo.Preco
+        </div>
+
+        <div class="d-flex justify-content-between mb-1">
+            <span class="h11 text-muted">@Veiculo.Ano</span>
+            <span class="h11 text-muted">@Veiculo.Quilometragem</span>
+        </div>
+
+        <div class="h11 text-muted mb-3">
+            @Veiculo.Localizacao
+        </div>
+
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-success w-50 rounded-pill h11 fw-semibold">
+                whatsapp
+            </a>
+
+            <a class="btn w-50 rounded-pill h11 fw-semibold text-white" style="background-color: var(--roxo);">
+                simular
+            </a>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public VeiculoCardDTO Veiculo { get; set; } = default!;
+
+    bool isClicked = false;
+
+    public void BtnClicado() {
+        isClicked = !isClicked;
+    }
+}
