@@ -1,0 +1,73 @@
+﻿@page "/BuscaAvulso"
+@rendermode InteractiveServer
+
+@* Conteudo da pagina *@
+<div class="row mx-auto justify-content-around" style="margin-top:2em; width:100%;">
+
+    @* Filtro de automóveis *@
+    <div class="col-md-2 col-s-6 rounded-2" style="background-color:var(--cinza-medio);">
+        <h6 class="text-center p-2">Filtro</h6>
+
+        <section class="row d-flex bg-white p-2">
+
+            <button class="col-4 border-0 rounded-start-pill" style="@(ehCarro
+                          ? "background-color:var(--roxo); color:white;"
+                          : "background-color:var(--cinza-claro); color:black;")"
+                    @onclick='() => FiltroVeiculo("carro")'>
+                Carro
+            </button>
+            <button class="col-4 border-0" style="@(ehMoto
+                        ? "background-color:var(--roxo); color:white;"
+                        : "background-color:var(--cinza-claro); color:black;")"
+                    @onclick='() => FiltroVeiculo("moto")'>
+                Moto
+            </button>
+            <button class="col-4 border-0 rounded-end-pill" style="@(ehScooter
+                         ? "background-color:var(--roxo); color:white;"
+                         : "background-color:var(--cinza-claro); color:black;")"
+                    @onclick='() => FiltroVeiculo("scooter")'>
+                Sccoter
+            </button>
+        </section>
+        
+        <hr>
+
+    </div>
+
+    @* Cards *@
+    <div class="col-md-9 col-sm-6" style="background-color:var(--cinza-claro);">
+        <h5 class="text-white p-1 text-center">pagina</h5>
+
+    </div>
+
+</div>
+
+@code {
+    string tipo = "";
+    bool ehCarro = false;
+    bool ehMoto = false;
+    bool ehScooter = false;
+
+    public void FiltroVeiculo(string tipo)
+    {
+        switch (tipo)
+        {
+            case "carro":
+                ehCarro = true;
+                ehMoto = false;
+                ehScooter = false;
+                break;
+            case "moto":
+                ehCarro = false;
+                ehMoto = true;
+                ehScooter = false;
+                break;
+            case "scooter":
+                ehCarro = false;
+                ehMoto = false;
+                ehScooter = true;
+                break;
+        }
+    }
+
+}
