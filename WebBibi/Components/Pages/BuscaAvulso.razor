@@ -1,42 +1,185 @@
 ﻿@page "/BuscaAvulso"
 @rendermode InteractiveServer
+@using WebBibi.Models
 
 @* Conteudo da pagina *@
 <div class="row mx-auto justify-content-around" style="margin-top:2em; width:100%;">
 
     @* Filtro de automóveis *@
-    <div class="col-md-2 col-s-6 rounded-2" style="background-color:var(--cinza-medio);">
-        <h6 class="text-center p-2">Filtro</h6>
+    <div class="col-md-2 col-s-6 rounded-2 py-5" style="background-color:var(--cinza-claro);">
+        <h5 class="text-center p-2">Filtro</h5>
 
         <section class="row d-flex bg-white p-2">
 
             <button class="col-4 border-0 rounded-start-pill" style="@(ehCarro
-                          ? "background-color:var(--roxo); color:white;"
-                          : "background-color:var(--cinza-claro); color:black;")"
+                                                                                        ? "background-color:var(--roxo); color:white;"
+                                                                                        : "background-color:var(--cinza-claro); color:black;")"
                     @onclick='() => FiltroVeiculo("carro")'>
                 Carro
             </button>
             <button class="col-4 border-0" style="@(ehMoto
-                        ? "background-color:var(--roxo); color:white;"
-                        : "background-color:var(--cinza-claro); color:black;")"
+                                                                   ? "background-color:var(--roxo); color:white;"
+                                                                   : "background-color:var(--cinza-claro); color:black;")"
                     @onclick='() => FiltroVeiculo("moto")'>
                 Moto
             </button>
             <button class="col-4 border-0 rounded-end-pill" style="@(ehScooter
-                         ? "background-color:var(--roxo); color:white;"
-                         : "background-color:var(--cinza-claro); color:black;")"
+                                                                                     ? "background-color:var(--roxo); color:white;"
+                                                                                     : "background-color:var(--cinza-claro); color:black;")"
                     @onclick='() => FiltroVeiculo("scooter")'>
                 Sccoter
             </button>
         </section>
-        
+
         <hr>
+
+        <div>
+            <h5 class="text-center pb-2">Estado</h5>
+            <input class="form-control" type="text" value="" placeholder="Rio de janeiro..." />
+        </div>
+
+        <hr>
+
+        @* Tipo de combustivel *@
+        <div class="row mx-auto justify-content-center py-2">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Tipo</option>
+                <option value="1">Gasolina</option>
+                <option value="2">Hibrido</option>
+                <option value="3">Elétrico</option>
+            </select>
+        </div>
+
+        <hr>
+
+        @* Faixa de preço *@
+        <div class="d-flex mx-auto flex-column">
+            <h5 class="text-center pb-2">Preço</h5>
+
+            <div class="row pb-4 gap-4 justify-content-center">
+                <input class="col-5 rounded-2 border-0 p-2" placeholder="Min..." />
+                <input class="col-5 rounded-2 border-0 p-2" placeholder="Max..." />
+            </div>
+        </div>
+
+        <hr>
+
+        @* Tipo de direção *@
+        <h5 class="text-center pb-2">Cambio</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+            <label class="form-check-label" for="radioDefault1">
+                Automático
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
+            <label class="form-check-label" for="radioDefault2">
+                Manual
+            </label>
+        </div>
+
+        <hr>
+
+        @* Marcas *@
+        <h5 class="text-center pb-2">Marcas</h5>
+        <div class="row gap-4">
+
+            <div class="col-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaFiat">
+                    <label class="form-check-label" for="marcaFiat">
+                        Fiat
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaVolks">
+                    <label class="form-check-label" for="marcaVolks">
+                        Volkswagen
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaChevrolet">
+                    <label class="form-check-label" for="marcaChevrolet">
+                        Chevrolet
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaFord">
+                    <label class="form-check-label" for="marcaFord">
+                        Ford
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaToyota">
+                    <label class="form-check-label" for="marcaToyota">
+                        Toyota
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaHyundai">
+                    <label class="form-check-label" for="marcaHyundai">
+                        Hyundai
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaRenault">
+                    <label class="form-check-label" for="marcaRenault">
+                        Renault
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaNissan">
+                    <label class="form-check-label" for="marcaNissan">
+                        Nissan
+                    </label>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaRenault">
+                    <label class="form-check-label" for="marcaRenault">
+                        Peugeot
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaNissan">
+                    <label class="form-check-label" for="marcaNissan">
+                        Citroën
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+
 
     </div>
 
     @* Cards *@
-    <div class="col-md-9 col-sm-6" style="background-color:var(--cinza-claro);">
-        <h5 class="text-white p-1 text-center">pagina</h5>
+    <div class="col-md-9 col-sm-6 rounded-2">
+
+        <div class="d-flex flex-wrap g-4 mt-auto">
+            
+            @for (int i = 0; i < 12; i++)
+            {
+                <CardAvulso/>               
+            }
+        </div>
 
     </div>
 
@@ -44,7 +187,7 @@
 
 @code {
     string tipo = "";
-    bool ehCarro = false;
+    bool ehCarro = true;
     bool ehMoto = false;
     bool ehScooter = false;
 
