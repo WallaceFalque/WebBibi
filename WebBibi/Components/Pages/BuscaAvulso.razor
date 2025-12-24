@@ -2,188 +2,160 @@
 @rendermode InteractiveServer
 @using WebBibi.Models
 
-@* Conteudo da pagina *@
-<div class="row mx-auto justify-content-around" style="margin-top:2em; width:100%;">
+@* Conteúdo da página *@
+<div class="container-fluid">
+    <div class="row mx-auto justify-content-around"
+         style="margin-top:2em; width:100%;">
 
-    @* Filtro de automóveis *@
-    <div class="col-md-2 col-s-6 rounded-2 py-5" style="background-color:var(--cinza-claro);">
-        <h5 class="text-center p-2">Filtro</h5>
+        @* FILTRO *@
+        <div class="col-md-3 col-lg-2 py-4">
+            <div class="filter-card"
+                 style="
+                    position: sticky;
+                    top: 2rem;
+                    height: fit-content;
+                 ">
 
-        <section class="row d-flex bg-white p-2">
+                <h5 class="text-center mb-4" style="font-weight: 800;">
+                    Filtros
+                </h5>
 
-            <button class="col-4 border-0 rounded-start-pill" style="@(ehCarro
-                                                                                        ? "background-color:var(--roxo); color:white;"
-                                                                                        : "background-color:var(--cinza-claro); color:black;")"
-                    @onclick='() => FiltroVeiculo("carro")'>
-                Carro
-            </button>
-            <button class="col-4 border-0 p-3" style="@(ehMoto
-                                                                   ? "background-color:var(--roxo); color:white;"
-                                                                   : "background-color:var(--cinza-claro); color:black;")"
-                    @onclick='() => FiltroVeiculo("moto")'>
-                Moto
-            </button>
-            <button class="col-4 border-0 rounded-end-pill" style="@(ehScooter
-                                                                                     ? "background-color:var(--roxo); color:white;"
-                                                                                     : "background-color:var(--cinza-claro); color:black;")"
-                    @onclick='() => FiltroVeiculo("scooter")'>
-                Sccoter
-            </button>
-        </section>
+                @* Tipo de Veículo *@
+                <div class="mb-4">
+                    <p class="filter-title">Veículo</p>
+                    <div class="btn-toggle-group">
+                        <button class="btn-toggle @(ehCarro ? "active" : "")"
+                                @onclick='() => FiltroVeiculo("carro")'>
+                            Carro
+                        </button>
 
-        <hr>
+                        <button class="btn-toggle @(ehMoto ? "active" : "")"
+                                @onclick='() => FiltroVeiculo("moto")'>
+                            Moto
+                        </button>
 
-        <div>
-            <h5 class="text-center pb-2">Estado</h5>
-            <input class="form-control" type="text" value="" placeholder="Rio de janeiro..." />
-        </div>
+                        <button class="btn-toggle @(ehScooter ? "active" : "")"
+                                @onclick='() => FiltroVeiculo("scooter")'>
+                            Scooter
+                        </button>
+                    </div>
+                </div>
 
-        <hr>
+                @* Localização *@
+                <div class="mb-4">
+                    <p class="filter-title">Localização</p>
+                    <input class="form-control custom-input"
+                           type="text"
+                           placeholder="Ex: Rio de Janeiro..." />
+                </div>
 
-        @* Tipo de combustivel *@
-        <div class="row mx-auto justify-content-center py-2">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Tipo</option>
-                <option value="1">Gasolina</option>
-                <option value="2">Hibrido</option>
-                <option value="3">Elétrico</option>
-            </select>
-        </div>
+                @* Combustível *@
+                <div class="mb-4">
+                    <p class="filter-title">Combustível</p>
+                    <select class="form-select custom-input">
+                        <option selected disabled>Selecione o tipo</option>
+                        <option>Gasolina</option>
+                        <option>Híbrido</option>
+                        <option>Elétrico</option>
+                    </select>
+                </div>
 
-        <hr>
+                @* Faixa de Preço *@
+                <div class="mb-4">
+                    <p class="filter-title">Preço</p>
+                    <div class="d-flex gap-2">
+                        <input class="form-control custom-input" placeholder="Min" />
+                        <input class="form-control custom-input" placeholder="Max" />
+                    </div>
+                </div>
 
-        @* Faixa de preço *@
-        <div class="d-flex mx-auto flex-column">
-            <h5 class="text-center pb-2">Preço</h5>
+                @* Câmbio *@
+                <div class="mb-4">
+                    <p class="filter-title">Câmbio</p>
+                    <div class="d-flex flex-column gap-2 px-1">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cambio"
+                                   id="auto">
+                            <label class="form-check-label" for="auto">
+                                Automático
+                            </label>
+                        </div>
 
-            <div class="row pb-4 gap-4 justify-content-center">
-                <input class="col-5 rounded-2 border-0 p-2" placeholder="Min..." />
-                <input class="col-5 rounded-2 border-0 p-2" placeholder="Max..." />
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cambio"
+                                   id="manual"
+                                   checked>
+                            <label class="form-check-label" for="manual">
+                                Manual
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                @* Marcas *@
+                <div>
+                    <p class="filter-title">Marcas Populares</p>
+                    <div class="brand-grid">
+                        @{
+                            var marcas = new[]
+                            {
+                                                "Fiat","Volks","Chevrolet","Ford",
+                                                "Toyota","Hyundai","Renault","Nissan"
+                                                };
+
+                            foreach (var marca in marcas)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="radioMarca"
+                                           id="@marca">
+                                    <label class="form-check-label"
+                                           for="@marca">
+                                        @marca
+                                    </label>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <button class="btn w-100 mt-4 shadow-sm"
+                        style="
+                            background-color: var(--roxo);
+                            border: none;
+                            border-radius: 10px;
+                            padding: 12px;
+                            color: white;
+                        ">
+                    Aplicar Filtros
+                </button>
             </div>
         </div>
 
-        <hr>
+        @* ===== CARDS ===== *@
+        <div class="col-md-9 col-sm-12 rounded-2">
+            <div class="row g-4">
 
-        @* Tipo de direção *@
-        <h5 class="text-center pb-2">Cambio</h5>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-            <label class="form-check-label" for="radioDefault1">
-                Automático
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
-            <label class="form-check-label" for="radioDefault2">
-                Manual
-            </label>
-        </div>
 
-        <hr>
+                @foreach (var veiculo in VeiculosFake)
+                {
+                    @if (veiculo.TipoDeVeiculo == tipoVeiculo)
+                    {
+                        <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                            <CardAvulso Veiculo="veiculo" />
+                        </div>
+                    }
+                }
 
-        @* Marcas *@
-        <h5 class="text-center pb-2">Marcas</h5>
-        <div class="row gap-4">
-
-            <div class="col-5">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaFiat">
-                    <label class="form-check-label" for="marcaFiat">
-                        Fiat
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaVolks">
-                    <label class="form-check-label" for="marcaVolks">
-                        Volkswagen
-                    </label>
-                </div>
             </div>
-
-            <div class="col-5">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaChevrolet">
-                    <label class="form-check-label" for="marcaChevrolet">
-                        Chevrolet
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaFord">
-                    <label class="form-check-label" for="marcaFord">
-                        Ford
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-5">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaToyota">
-                    <label class="form-check-label" for="marcaToyota">
-                        Toyota
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaHyundai">
-                    <label class="form-check-label" for="marcaHyundai">
-                        Hyundai
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-5">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaRenault">
-                    <label class="form-check-label" for="marcaRenault">
-                        Renault
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaNissan">
-                    <label class="form-check-label" for="marcaNissan">
-                        Nissan
-                    </label>
-                </div>
-            </div>
-            <div class="col-5">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaRenault">
-                    <label class="form-check-label" for="marcaRenault">
-                        Peugeot
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="radioMarca" id="marcaNissan">
-                    <label class="form-check-label" for="marcaNissan">
-                        Citroën
-                    </label>
-                </div>
-            </div>
-
         </div>
 
     </div>
-
-    @* Cards *@
-    <div class="col-md-9 col-sm-12 rounded-2">
-
-        <div class="d-flex flex-wrap g-4 mt-auto">
-            
-            @foreach (var veiculo in VeiculosFake)
-            {
-                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                    <CardAvulso Veiculo="veiculo" />
-                </div>
-            }
-
-        </div>
-
-    </div>
-
 </div>
 
 @code {
@@ -191,6 +163,9 @@
     bool ehCarro = true;
     bool ehMoto = false;
     bool ehScooter = false;
+    string tipoVeiculo = "carro";
+
+    public Veiculo veiculo { get; set; }
 
     public void FiltroVeiculo(string tipo)
     {
@@ -212,11 +187,13 @@
                 ehScooter = true;
                 break;
         }
-    }
-    
 
+        tipoVeiculo = tipo;
+    }
+       
     List<Veiculo> VeiculosFake = new()
 {
+    // ===== CARROS =====
     new Veiculo
     {
         Modelo = "Onix LT",
@@ -225,7 +202,8 @@
         Preco = 65000m,
         EhOferta = true,
         AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        TipoDeVeiculo = "carro",
+        ImagemUrl = "/Img/Img-Teste.jpg/"
     },
     new Veiculo
     {
@@ -235,6 +213,7 @@
         Preco = 72000m,
         EhOferta = false,
         AceitaUsado = true,
+        TipoDeVeiculo = "carro",
         ImagemUrl = "/Img/Img-Teste.jpg"
     },
     new Veiculo
@@ -245,36 +224,7 @@
         Preco = 61000m,
         EhOferta = true,
         AceitaUsado = false,
-        ImagemUrl = "/Img/Img-Teste.jpg"
-    },
-    new Veiculo
-    {
-        Modelo = "Gol Trend",
-        Marca = "Volkswagen",
-        Ano = 2019,
-        Preco = 54000m,
-        EhOferta = false,
-        AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
-    },
-    new Veiculo
-    {
-        Modelo = "Ka SE",
-        Marca = "Ford",
-        Ano = 2018,
-        Preco = 49000m,
-        EhOferta = true,
-        AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
-    },
-    new Veiculo
-    {
-        Modelo = "Sandero Expression",
-        Marca = "Renault",
-        Ano = 2020,
-        Preco = 58000m,
-        EhOferta = false,
-        AceitaUsado = true,
+        TipoDeVeiculo = "carro",
         ImagemUrl = "/Img/Img-Teste.jpg"
     },
     new Veiculo
@@ -285,59 +235,81 @@
         Preco = 98000m,
         EhOferta = true,
         AceitaUsado = false,
+        TipoDeVeiculo = "carro",
         ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+
+    // ===== MOTOS =====
+    new Veiculo
+    {
+        Modelo = "CG 160 Fan",
+        Marca = "Honda",
+        Ano = 2022,
+        Preco = 14500m,
+        EhOferta = true,
+        AceitaUsado = true,
+        TipoDeVeiculo = "moto",
+        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
     },
     new Veiculo
     {
-        Modelo = "Yaris XS",
-        Marca = "Toyota",
+        Modelo = "Fazer 250",
+        Marca = "Yamaha",
         Ano = 2021,
-        Preco = 89000m,
+        Preco = 21000m,
         EhOferta = false,
         AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        TipoDeVeiculo = "moto",
+        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
     },
     new Veiculo
     {
-        Modelo = "Kwid Zen",
-        Marca = "Renault",
-        Ano = 2022,
-        Preco = 52000m,
+        Modelo = "CB 300F Twister",
+        Marca = "Honda",
+        Ano = 2023,
+        Preco = 24500m,
         EhOferta = true,
         AceitaUsado = false,
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        TipoDeVeiculo = "moto",
+        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
     },
+
+    // ===== SCOOTERS =====
     new Veiculo
     {
-        Modelo = "Polo MSI",
-        Marca = "Volkswagen",
-        Ano = 2020,
-        Preco = 78000m,
-        EhOferta = false,
-        AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
-    },
-    new Veiculo
-    {
-        Modelo = "Cronos Precision",
-        Marca = "Fiat",
-        Ano = 2021,
-        Preco = 83000m,
+        Modelo = "PCX 160",
+        Marca = "Honda",
+        Ano = 2022,
+        Preco = 18500m,
         EhOferta = true,
         AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        TipoDeVeiculo = "scooter",
+        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
     },
     new Veiculo
     {
-        Modelo = "Versa Advance",
-        Marca = "Nissan",
-        Ano = 2022,
-        Preco = 91000m,
+        Modelo = "NMax 160",
+        Marca = "Yamaha",
+        Ano = 2021,
+        Preco = 17500m,
         EhOferta = false,
         AceitaUsado = true,
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        TipoDeVeiculo = "scooter",
+        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+    },
+    new Veiculo
+    {
+        Modelo = "ADV 160",
+        Marca = "Honda",
+        Ano = 2023,
+        Preco = 22500m,
+        EhOferta = true,
+        AceitaUsado = false,
+        TipoDeVeiculo = "scooter",
+        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
     }
 };
+
 
 
 }

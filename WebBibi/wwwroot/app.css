@@ -65,3 +65,87 @@ body {
         height: 60vh;
     }
 }
+
+/*Filtro busca avulso*/
+.filter-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+}
+
+.filter-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-toggle-group {
+    background-color: #f8f9fa;
+    padding: 4px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.btn-toggle {
+    border: none;
+    flex: 1;
+    padding: 8px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+    .btn-toggle.active {
+        background-color: var(--roxo);
+        color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+.custom-input {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.brand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/*Butão roxo card avulso*/
+.btn-roxo-outline:hover {
+    background-color: var(--roxo);
+    color: white !important;
+    border-color: var(--roxo);
+}
+
+.btn-roxo-outline {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/*Radio btn roxo*/
+.form-check-input:checked {
+    background-color: var(--roxo);
+    border-color: var(--roxo);
+}
+
+.form-check-input:focus {
+    border-color: var(--roxo);
+    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.25); 
+}
+
+.form-check-input:checked:focus {
+    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.35);
+}

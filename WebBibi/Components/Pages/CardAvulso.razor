@@ -1,18 +1,7 @@
-﻿<style>
-    .btn-roxo-outline:hover {
-        background-color: var(--roxo);
-        color: white !important;
-        border-color: var(--roxo);
-    }
+﻿
+<div class="card m-2 w-100 rounded-2">
 
-    .btn-roxo-outline {
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-</style>
-
-<div class="card m-2 w-100" style="width:18rem;">
-
-    @if (Veiculo.EhOferta)
+    @if (veiculo.EhOferta)
     {
         <h5 class="text-white text-center p-2 mb-0"
             style="background-color:var(--roxo);">
@@ -26,15 +15,16 @@
         </h5>
     }
 
-    <img src="@Veiculo.ImagemUrl"
+    <img src="@veiculo.ImagemUrl"
          class="card-img-top"
-         alt="@Veiculo.Modelo">
+         alt="@veiculo.Modelo"
+        style="height:18vh;">
 
     <div class="card-body">
 
-        <h3 class="card-title mb-1">@Veiculo.Modelo</h3>
+        <h3 class="card-title mb-1">@veiculo.Modelo</h3>
         <small class="text-muted">
-            @Veiculo.Marca • @Veiculo.Ano
+            @veiculo.Marca • @veiculo.Ano
         </small>
 
         <hr class="my-3">
@@ -42,18 +32,18 @@
         <div class="mb-2">
             <p class="mb-1">Entrada a partir de</p>
             <h2 class="fw-bolder mb-0" style="color:var(--roxo);">
-                @CalcularEntrada(Veiculo.Preco).ToString("C")
+                @CalcularEntrada(veiculo.Preco).ToString("C")
             </h2>
         </div>
 
         <small class="text-muted">
             Parcelas em até 36x de
             <strong>
-                @CalcularParcela(Veiculo.Preco).ToString("C")
+                @CalcularParcela(veiculo.Preco).ToString("C")
             </strong>
         </small>
 
-        @if (Veiculo.AceitaUsado)
+        @if (veiculo.AceitaUsado)
         {
             <p class="pt-3 mb-0">
                 ✔ Aceitamos seu usado na troca
@@ -61,7 +51,7 @@
         }
     </div>
 
-    <div class="row justify-content-center p-2 gap-2">
+    <div class="row justify-content-center p-2 pb-4 gap-2">
         <a class="col-10 btn btn-outline-primary btn-roxo-outline"
            style="color:var(--roxo); border-color:var(--roxo);">
             Entrar em contato
@@ -77,7 +67,7 @@
 
 @code {
     [Parameter]
-    public Veiculo Veiculo { get; set; }  
+    public Veiculo veiculo { get; set; }  
 
     decimal CalcularEntrada(decimal preco)
     {

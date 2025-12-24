@@ -21,6 +21,7 @@
         public bool EhOferta { get; set; }
         public bool AceitaUsado { get; set; }
         public string ImagemUrl { get; set; }
+        public string TipoDeVeiculo { get; set; }
     }
 
 }
