@@ -17,7 +17,7 @@
                     @onclick='() => FiltroVeiculo("carro")'>
                 Carro
             </button>
-            <button class="col-4 border-0" style="@(ehMoto
+            <button class="col-4 border-0 p-3" style="@(ehMoto
                                                                    ? "background-color:var(--roxo); color:white;"
                                                                    : "background-color:var(--cinza-claro); color:black;")"
                     @onclick='() => FiltroVeiculo("moto")'>
@@ -166,19 +166,20 @@
 
         </div>
 
-
-
     </div>
 
     @* Cards *@
-    <div class="col-md-9 col-sm-6 rounded-2">
+    <div class="col-md-9 col-sm-12 rounded-2">
 
         <div class="d-flex flex-wrap g-4 mt-auto">
             
-            @for (int i = 0; i < 12; i++)
+            @foreach (var veiculo in VeiculosFake)
             {
-                <CardAvulso/>               
+                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                    <CardAvulso Veiculo="veiculo" />
+                </div>
             }
+
         </div>
 
     </div>
@@ -212,5 +213,131 @@
                 break;
         }
     }
+    
+
+    List<Veiculo> VeiculosFake = new()
+{
+    new Veiculo
+    {
+        Modelo = "Onix LT",
+        Marca = "Chevrolet",
+        Ano = 2021,
+        Preco = 65000m,
+        EhOferta = true,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "HB20 Comfort",
+        Marca = "Hyundai",
+        Ano = 2022,
+        Preco = 72000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Argo Drive",
+        Marca = "Fiat",
+        Ano = 2020,
+        Preco = 61000m,
+        EhOferta = true,
+        AceitaUsado = false,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Gol Trend",
+        Marca = "Volkswagen",
+        Ano = 2019,
+        Preco = 54000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Ka SE",
+        Marca = "Ford",
+        Ano = 2018,
+        Preco = 49000m,
+        EhOferta = true,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Sandero Expression",
+        Marca = "Renault",
+        Ano = 2020,
+        Preco = 58000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Corolla GLi",
+        Marca = "Toyota",
+        Ano = 2019,
+        Preco = 98000m,
+        EhOferta = true,
+        AceitaUsado = false,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Yaris XS",
+        Marca = "Toyota",
+        Ano = 2021,
+        Preco = 89000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Kwid Zen",
+        Marca = "Renault",
+        Ano = 2022,
+        Preco = 52000m,
+        EhOferta = true,
+        AceitaUsado = false,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Polo MSI",
+        Marca = "Volkswagen",
+        Ano = 2020,
+        Preco = 78000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Cronos Precision",
+        Marca = "Fiat",
+        Ano = 2021,
+        Preco = 83000m,
+        EhOferta = true,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    },
+    new Veiculo
+    {
+        Modelo = "Versa Advance",
+        Marca = "Nissan",
+        Ano = 2022,
+        Preco = 91000m,
+        EhOferta = false,
+        AceitaUsado = true,
+        ImagemUrl = "/Img/Img-Teste.jpg"
+    }
+};
+
 
 }

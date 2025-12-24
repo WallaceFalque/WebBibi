@@ -1,20 +1,98 @@
-﻿<div class="card m-2" style="width: 18rem;">
-    <img src="/Img/Img-Teste.jpg" class="card-img-top" alt="...">
+﻿<style>
+    .btn-roxo-outline:hover {
+        background-color: var(--roxo);
+        color: white !important;
+        border-color: var(--roxo);
+    }
+
+    .btn-roxo-outline {
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+</style>
+
+<div class="card m-2 w-100" style="width:18rem;">
+
+    @if (Veiculo.EhOferta)
+    {
+        <h5 class="text-white text-center p-2 mb-0"
+            style="background-color:var(--roxo);">
+            Oferta especial
+        </h5>
+    } else
+    {
+        <h5 class="text-white text-center p-2 mb-0"
+            style="background-color:var(--roxo);">
+            Venda
+        </h5>
+    }
+
+    <img src="@Veiculo.ImagemUrl"
+         class="card-img-top"
+         alt="@Veiculo.Modelo">
+
     <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+
+        <h3 class="card-title mb-1">@Veiculo.Modelo</h3>
+        <small class="text-muted">
+            @Veiculo.Marca • @Veiculo.Ano
+        </small>
+
+        <hr class="my-3">
+
+        <div class="mb-2">
+            <p class="mb-1">Entrada a partir de</p>
+            <h2 class="fw-bolder mb-0" style="color:var(--roxo);">
+                @CalcularEntrada(Veiculo.Preco).ToString("C")
+            </h2>
+        </div>
+
+        <small class="text-muted">
+            Parcelas em até 36x de
+            <strong>
+                @CalcularParcela(Veiculo.Preco).ToString("C")
+            </strong>
+        </small>
+
+        @if (Veiculo.AceitaUsado)
+        {
+            <p class="pt-3 mb-0">
+                ✔ Aceitamos seu usado na troca
+            </p>
+        }
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-    </ul>
-    <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+
+    <div class="row justify-content-center p-2 gap-2">
+        <a class="col-10 btn btn-outline-primary btn-roxo-outline"
+           style="color:var(--roxo); border-color:var(--roxo);">
+            Entrar em contato
+        </a>
+
+        <a class="col-10 btn btn-outline-success">
+            <i class="bi bi-whatsapp"></i> Contato via WhatsApp
+        </a>
     </div>
+
 </div>
 
+
 @code {
+    [Parameter]
+    public Veiculo Veiculo { get; set; }  
+
+    decimal CalcularEntrada(decimal preco)
+    {
+        return preco * 0.10m; 
+    }
+
+    decimal CalcularValorFinanciado(decimal preco)
+    {
+        return preco - CalcularEntrada(preco);
+    }
+
+    decimal CalcularParcela(decimal preco, int parcelas = 36)
+    {
+        return CalcularValorFinanciado(preco) / parcelas;
+    }
+
 
 }
