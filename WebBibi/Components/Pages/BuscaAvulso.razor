@@ -46,8 +46,26 @@
                     <p class="filter-title">Localização</p>
                     <input class="form-control custom-input"
                            type="text"
-                           placeholder="Ex: Rio de Janeiro..." />
+                           placeholder="Ex: Rio de Janeiro..."
+                           value="@estadoDigitado"
+                           @oninput="AtualizarSugestoes" />
+
+                    @if (sugestoes.Any())
+                    {
+                        <div class="bg-white border rounded mt-1 shadow-sm">
+                            @foreach (var estado in sugestoes)
+                            {
+                                <div class="p-2 sugestao-item"
+                                     style="cursor:pointer"
+                                     @onclick="() => SelecionarEstado(estado)">
+                                    @estado
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
+
+
 
                 @* Combustível *@
                 <div class="mb-4">
@@ -138,13 +156,13 @@
         </div>
 
         @* ===== CARDS ===== *@
-        <div class="col-md-9 col-sm-12 rounded-2">
-            <div class="row g-4">
+        <div class="col-md-10 col-sm-12 rounded-2">
+            <div class="row g-2">
 
 
                 @foreach (var veiculo in VeiculosFake)
                 {
-                    @if (veiculo.TipoDeVeiculo == tipoVeiculo)
+                    @if (veiculo.TipoDeVeiculo == tipoVeiculo && !veiculo.EstadoBloqueado.Contains(estadoDigitado, StringComparer.OrdinalIgnoreCase))
                     {
                         <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
                             <CardAvulso Veiculo="veiculo" />
@@ -158,12 +176,74 @@
     </div>
 </div>
 
+@* Conteudo fora dos cards *@
+<div class="row py-5 justify-content-center mx-auto">
+    <div class="col-11 col-lg-10 bg-white rounded-3 shadow-sm">
+
+        @* Texto *@
+        <div class="p-4 p-lg-5">
+            <h3 class="fw-bold mb-2">
+                Não encontrou a oferta ideal?
+            </h3>
+
+            <p class="fs-5 text-muted mb-3">
+                Sem problemas. Nossa equipe está pronta para te ajudar a encontrar
+                o veículo perfeito, de forma rápida, segura e sem burocracia.
+            </p>
+
+            <ul class="list-unstyled mb-4">
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Atendimento personalizado
+                </li>
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Simulações de financiamento sob medida
+                </li>
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Aceitamos seu usado na troca
+                </li>
+            </ul>
+
+            <hr class="my-4">
+
+            @* Botões *@
+            <div class="row gap-3 justify-content-start">
+
+                <a class="col-12 col-md-4 btn btn-outline-primary btn-roxo-outline
+                           d-flex align-items-center justify-content-center gap-2"
+                   style="color:var(--roxo); border-color:var(--roxo);">
+                    <i class="bi bi-envelope-fill"></i>
+                    Falar com um especialista
+                </a>
+
+                <a class="col-12 col-md-3 btn btn-outline-success
+                           d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-whatsapp"></i>
+                    WhatsApp
+                </a>
+
+                <a class="col-12 col-md-3 btn btn-outline-danger
+                           d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-telephone-fill"></i>
+                    Ligação
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 @code {
     string tipo = "";
     bool ehCarro = true;
     bool ehMoto = false;
     bool ehScooter = false;
     string tipoVeiculo = "carro";
+    string estadoDigitado = "";
 
     public Veiculo veiculo { get; set; }
 
@@ -190,125 +270,238 @@
 
         tipoVeiculo = tipo;
     }
-       
+
+    List<string> estados = new()
+    {
+        "Acre",
+        "Alagoas",
+        "Amapá",
+        "Amazonas",
+        "Bahia",
+        "Ceará",
+        "Distrito Federal",
+        "Espírito Santo",
+        "Goiás",
+        "Maranhão",
+        "Mato Grosso",
+        "Mato Grosso do Sul",
+        "Minas Gerais",
+        "Pará",
+        "Paraíba",
+        "Paraná",
+        "Pernambuco",
+        "Piauí",
+        "Rio de Janeiro",
+        "Rio Grande do Norte",
+        "Rio Grande do Sul",
+        "Rondônia",
+        "Roraima",
+        "Santa Catarina",
+        "São Paulo",
+        "Sergipe",
+        "Tocantins"
+
+    };
+
+    List<string> sugestoes = new();
+
+    void AtualizarSugestoes(ChangeEventArgs e)
+    {
+        estadoDigitado = e.Value?.ToString() ?? "";
+
+        if (string.IsNullOrWhiteSpace(estadoDigitado))
+        {
+            sugestoes.Clear();
+            return;
+        }
+
+        sugestoes = estados
+            .Where(e => e.Contains(estadoDigitado, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+
+    void SelecionarEstado(string estado)
+    {
+        estadoDigitado = estado;
+        sugestoes.Clear();
+
+
+    }
+
+
+
     List<Veiculo> VeiculosFake = new()
 {
     // ===== CARROS =====
-    new Veiculo
+   new Veiculo
+{
+    Modelo = "Onix LT",
+    Marca = "Chevrolet",
+    Ano = 2021,
+    Preco = 65000m,
+    EhOferta = true,
+    AceitaUsado = true,
+    TipoDeVeiculo = "carro",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "Onix LT",
-        Marca = "Chevrolet",
-        Ano = 2021,
-        Preco = 65000m,
-        EhOferta = true,
-        AceitaUsado = true,
-        TipoDeVeiculo = "carro",
-        ImagemUrl = "/Img/Img-Teste.jpg/"
+        "Amazonas",
+        "Acre",
+        "Roraima"
     },
-    new Veiculo
+    ImagemUrl = "/Img/Img-Teste.jpg/"
+},
+new Veiculo
+{
+    Modelo = "HB20 Comfort",
+    Marca = "Hyundai",
+    Ano = 2022,
+    Preco = 72000m,
+    EhOferta = false,
+    AceitaUsado = true,
+    TipoDeVeiculo = "carro",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "HB20 Comfort",
-        Marca = "Hyundai",
-        Ano = 2022,
-        Preco = 72000m,
-        EhOferta = false,
-        AceitaUsado = true,
-        TipoDeVeiculo = "carro",
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        "Maranhão",
+        "Piauí",
+        "Ceará"
     },
-    new Veiculo
+    ImagemUrl = "/Img/Img-Teste.jpg"
+},
+new Veiculo
+{
+    Modelo = "Argo Drive",
+    Marca = "Fiat",
+    Ano = 2020,
+    Preco = 61000m,
+    EhOferta = true,
+    AceitaUsado = false,
+    TipoDeVeiculo = "carro",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "Argo Drive",
-        Marca = "Fiat",
-        Ano = 2020,
-        Preco = 61000m,
-        EhOferta = true,
-        AceitaUsado = false,
-        TipoDeVeiculo = "carro",
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        "Pará",
+        "Amapá"
     },
-    new Veiculo
+    ImagemUrl = "/Img/Img-Teste.jpg"
+},
+new Veiculo
+{
+    Modelo = "Corolla GLi",
+    Marca = "Toyota",
+    Ano = 2019,
+    Preco = 98000m,
+    EhOferta = true,
+    AceitaUsado = false,
+    TipoDeVeiculo = "carro",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "Corolla GLi",
-        Marca = "Toyota",
-        Ano = 2019,
-        Preco = 98000m,
-        EhOferta = true,
-        AceitaUsado = false,
-        TipoDeVeiculo = "carro",
-        ImagemUrl = "/Img/Img-Teste.jpg"
+        "Amazonas",
+        "Rondônia",
+        "Acre"
     },
+    ImagemUrl = "/Img/Img-Teste.jpg"
+},
 
-    // ===== MOTOS =====
-    new Veiculo
+// ===== MOTOS =====
+new Veiculo
+{
+    Modelo = "CG 160 Fan",
+    Marca = "Honda",
+    Ano = 2022,
+    Preco = 14500m,
+    EhOferta = true,
+    AceitaUsado = true,
+    TipoDeVeiculo = "moto",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "CG 160 Fan",
-        Marca = "Honda",
-        Ano = 2022,
-        Preco = 14500m,
-        EhOferta = true,
-        AceitaUsado = true,
-        TipoDeVeiculo = "moto",
-        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+        "Maranhão",
+        "Rio Grande do Norte"
     },
-    new Veiculo
+    ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+},
+new Veiculo
+{
+    Modelo = "Fazer 250",
+    Marca = "Yamaha",
+    Ano = 2021,
+    Preco = 21000m,
+    EhOferta = false,
+    AceitaUsado = true,
+    TipoDeVeiculo = "moto",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "Fazer 250",
-        Marca = "Yamaha",
-        Ano = 2021,
-        Preco = 21000m,
-        EhOferta = false,
-        AceitaUsado = true,
-        TipoDeVeiculo = "moto",
-        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+        "Pará",
+        "Amazonas"
     },
-    new Veiculo
+    ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+},
+new Veiculo
+{
+    Modelo = "CB 300F Twister",
+    Marca = "Honda",
+    Ano = 2023,
+    Preco = 24500m,
+    EhOferta = true,
+    AceitaUsado = false,
+    TipoDeVeiculo = "moto",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "CB 300F Twister",
-        Marca = "Honda",
-        Ano = 2023,
-        Preco = 24500m,
-        EhOferta = true,
-        AceitaUsado = false,
-        TipoDeVeiculo = "moto",
-        ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+        "Amapá",
+        "Roraima"
     },
+    ImagemUrl = "https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg"
+},
 
-    // ===== SCOOTERS =====
-    new Veiculo
+// ===== SCOOTERS =====
+new Veiculo
+{
+    Modelo = "PCX 160",
+    Marca = "Honda",
+    Ano = 2022,
+    Preco = 18500m,
+    EhOferta = true,
+    AceitaUsado = true,
+    TipoDeVeiculo = "scooter",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "PCX 160",
-        Marca = "Honda",
-        Ano = 2022,
-        Preco = 18500m,
-        EhOferta = true,
-        AceitaUsado = true,
-        TipoDeVeiculo = "scooter",
-        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+        "Amazonas",
+        "Acre"
     },
-    new Veiculo
+    ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+},
+new Veiculo
+{
+    Modelo = "NMax 160",
+    Marca = "Yamaha",
+    Ano = 2021,
+    Preco = 17500m,
+    EhOferta = false,
+    AceitaUsado = true,
+    TipoDeVeiculo = "scooter",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "NMax 160",
-        Marca = "Yamaha",
-        Ano = 2021,
-        Preco = 17500m,
-        EhOferta = false,
-        AceitaUsado = true,
-        TipoDeVeiculo = "scooter",
-        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+        "Maranhão",
+        "Piauí"
     },
-    new Veiculo
+    ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+},
+new Veiculo
+{
+    Modelo = "ADV 160",
+    Marca = "Honda",
+    Ano = 2023,
+    Preco = 22500m,
+    EhOferta = true,
+    AceitaUsado = false,
+    TipoDeVeiculo = "scooter",
+    EstadoBloqueado = new List<string>
     {
-        Modelo = "ADV 160",
-        Marca = "Honda",
-        Ano = 2023,
-        Preco = 22500m,
-        EhOferta = true,
-        AceitaUsado = false,
-        TipoDeVeiculo = "scooter",
-        ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
-    }
-};
+        "Pará",
+        "Rondônia"
+    },
+    ImagemUrl = "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg"
+}
+    };
 
 
 
