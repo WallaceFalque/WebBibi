@@ -124,6 +124,16 @@ body {
     cursor: pointer;
 }
 
+/*troca cor quando passa o mouse pra roxo */
+.btn-outline-primary {
+    color: var(--roxo);
+    border-color: var(--roxo);
+} 
+    .btn-outline-primary:hover {
+        background-color: var(--roxo);
+        border-color: var(--roxo);
+    }
+
 /*Butão roxo card avulso*/
 .btn-roxo-outline:hover {
     background-color: var(--roxo);
@@ -149,4 +159,3 @@ body {
 .form-check-input:checked:focus {
     box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.35);
 }
-
