@@ -81,11 +81,26 @@
                 @* Faixa de Preço *@
                 <div class="mb-4">
                     <p class="filter-title">Preço</p>
-                    <div class="d-flex gap-2">
-                        <input class="form-control custom-input" placeholder="Min" type="number"
-                        />
-                        <input class="form-control custom-input" placeholder="Max" type="number" />
+                    <div class="d-flex flex-column gap-2">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input class="form-control custom-input" placeholder="Min" @bind="valorMinimoInput" type="number" />
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control custom-input" placeholder="Max" @bind="valorMaximoInput" type="number" />
+                            </div>
+                        </div>
+
+                        <button class="btn w-100 mt-2 shadow-sm text-white p-1"
+                                style="background-color: var(--roxo);
+                            border: none;
+                            border-radius: 10px;"
+                                @onclick='() => IntervaloDeValor(valorMinimoInput, valorMaximoInput)'>
+                            Aplicar Filtros
+                        </button>
+
                     </div>
+
                 </div>
 
                 @* Câmbio *@
@@ -97,7 +112,7 @@
                                    type="radio"
                                    name="cambio"
                                    id="auto"
-                            @onclick='() => TipoCambio("Automatico")'>
+                                   @onclick='() => TipoCambio("Automatico")'>
                             <label class="form-check-label" for="auto">
                                 Automático
                             </label>
@@ -109,7 +124,7 @@
                                    name="cambio"
                                    id="manual"
                                    checked
-                            @onclick='() => TipoCambio("Manual")'>
+                                   @onclick='() => TipoCambio("Manual")'>
                             <label class="form-check-label" for="manual">
                                 Manual
                             </label>
@@ -120,7 +135,7 @@
                                    name="cambio"
                                    id="manual"
                                    checked
-                            @onclick='() => TipoCambio("Ambos")'>
+                                   @onclick='() => TipoCambio("Ambos")'>
                             <label class="form-check-label" for="manual">
                                 Ambos
                             </label>
@@ -163,7 +178,7 @@
                             border-radius: 10px;
                             padding: 12px;
                             color: white;">
-                    Aplicar Filtros
+                    Limpar filtros
                 </button>
             </div>
         </div>
@@ -179,9 +194,13 @@
                     {
                         @if (veiculo.Cambio == cambioTipo || cambioTipo == "Ambos")
                         {
-                            <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                                <CardAvulso Veiculo="veiculo" />
-                            </div>
+                            @if ((!valorMinimo.HasValue || veiculo.Preco >= valorMinimo) &&
+                                            (!valorMaximo.HasValue || veiculo.Preco <= valorMaximo))
+                            {
+                                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                                    <CardAvulso Veiculo="veiculo" />
+                                </div>
+                            }
                         }
                     }
                 }
@@ -261,9 +280,14 @@
     string tipoVeiculo = "carro";
     string estadoDigitado = "";
     string cambioTipo = "Ambos";
+    decimal? valorMinimo;
+    decimal? valorMaximo;
+    decimal valorMaximoInput = 0;
+    decimal valorMinimoInput = 0;
 
     public Veiculo veiculo { get; set; }
 
+    // Filtro de automóveis
     public void FiltroVeiculo(string tipo)
     {
         switch (tipo)
@@ -288,6 +312,7 @@
         tipoVeiculo = tipo;
     }
 
+    // Filtro por estado
     List<string> estados = new()
     {
         "Acre",
@@ -318,12 +343,7 @@
         "Sergipe",
         "Tocantins"
 
-    };
-
-    void TipoCambio (string tipo)
-    {
-        cambioTipo = tipo;
-    }
+    };  
 
     List<string> sugestoes = new();
 
@@ -348,6 +368,19 @@
         estadoDigitado = estado;
         sugestoes.Clear();
 
+    }
+
+    // Filtro de Câmbio
+    void TipoCambio(string tipo)
+    {
+        cambioTipo = tipo;
+    }
+
+    // Filtro de preço
+    void IntervaloDeValor (decimal min, decimal max)
+    {
+        valorMinimo = min;
+        valorMaximo = max;
     }
 
     List<Veiculo> VeiculosFake = new()

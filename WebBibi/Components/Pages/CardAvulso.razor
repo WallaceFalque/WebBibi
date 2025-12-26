@@ -41,6 +41,15 @@
             <strong>
                 @CalcularParcela(veiculo.Preco).ToString("C")
             </strong>
+        </small>   
+        
+        <br>
+
+        <small class="text-muted">
+            Total de R$
+            <strong>
+                @veiculo.Preco.ToString("C")
+            </strong>
         </small>
 
         @if (veiculo.AceitaUsado)
