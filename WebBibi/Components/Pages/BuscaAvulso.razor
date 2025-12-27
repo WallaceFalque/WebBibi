@@ -70,11 +70,12 @@
                 @* Combustível *@
                 <div class="mb-4">
                     <p class="filter-title">Combustível</p>
-                    <select class="form-select custom-input">
+                    <select @onchange='TipoCombustivel' class="form-select custom-input">
                         <option selected disabled>Selecione o tipo</option>
-                        <option>Gasolina</option>
-                        <option>Híbrido</option>
-                        <option>Elétrico</option>
+                        <option value="Gasolina">Gasolina</option>
+                        <option value="Hibrido">Híbrido</option>
+                        <option value="Eletrico">Elétrico</option>
+                        <option value="Ambos">Ambos</option>
                     </select>
                 </div>
 
@@ -150,17 +151,22 @@
                         @{
                             var marcas = new[]
                             {
-                                                "Fiat","Volks","Chevrolet","Ford",
-                                                "Toyota","Hyundai","Renault","Nissan"
+                                                "Todos", "Fiat", "Volkswagen", "Chevrolet",
+                                                "Ford", "Toyota","Hyundai", "Renault", "Nissan",
+                                                "Peugeot", "Citroën","Honda", "Jeep", "Mitsubishi",
+                                                "Chery", "BYD", "GM", "Kia", "Subaru", "Suzuki",
+                                                "BMW", "Volvo"
                                                 };
 
                             foreach (var marca in marcas)
                             {
                                 <div class="form-check">
                                     <input class="form-check-input"
-                                           type="radio"
+                                           type="checkbox"
                                            name="radioMarca"
-                                           id="@marca">
+                                           checked="@MarcasSelecionadas.Contains(marca)"
+                                           id="@marca"
+                                           @onclick='() => EscolhaMarcas(marca)'>                                           
                                     <label class="form-check-label"
                                            for="@marca">
                                         @marca
@@ -169,17 +175,7 @@
                             }
                         }
                     </div>
-                </div>
-
-                <button class="btn w-100 mt-4 shadow-sm"
-                        style="
-                            background-color: var(--roxo);
-                            border: none;
-                            border-radius: 10px;
-                            padding: 12px;
-                            color: white;">
-                    Limpar filtros
-                </button>
+                </div>              
             </div>
         </div>
 
@@ -197,13 +193,22 @@
                             @if ((!valorMinimo.HasValue || veiculo.Preco >= valorMinimo) &&
                                             (!valorMaximo.HasValue || veiculo.Preco <= valorMaximo))
                             {
-                                <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
-                                    <CardAvulso Veiculo="veiculo" />
-                                </div>
+                                @if (veiculo.Combustivel == tipoCombustivel || tipoCombustivel == "Ambos")
+                                {
+                                    @if (MarcasSelecionadas.Contains(veiculo.Marca) || MarcasSelecionadas.Contains("Todos"))
+                                    {
+                                        <div class="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                                            <CardAvulso Veiculo="veiculo" />
+                                        </div>
+                                    }
+                                }
+
                             }
+
                         }
                     }
                 }
+
 
             </div>
         </div>
@@ -284,6 +289,8 @@
     decimal? valorMaximo;
     decimal valorMaximoInput = 0;
     decimal valorMinimoInput = 0;
+    string tipoCombustivel = "Ambos";
+    string escolhaMarca = "Todos";
 
     public Veiculo veiculo { get; set; }
 
@@ -343,7 +350,7 @@
         "Sergipe",
         "Tocantins"
 
-    };  
+    };
 
     List<string> sugestoes = new();
 
@@ -377,10 +384,39 @@
     }
 
     // Filtro de preço
-    void IntervaloDeValor (decimal min, decimal max)
+    void IntervaloDeValor(decimal min, decimal max)
     {
         valorMinimo = min;
         valorMaximo = max;
+    }
+
+    // Filtro combustivel
+    void TipoCombustivel(ChangeEventArgs e)
+    {
+        tipoCombustivel = e.Value.ToString() ?? "Ambos";
+    }
+
+    // Filtro marcas
+    List<string> MarcasSelecionadas = new()
+    {
+        "Todos"
+    };
+
+    void EscolhaMarcas(string marca)
+    {
+        if (marca != "Todos")
+        {
+            MarcasSelecionadas.Remove("Todos");
+        }
+
+        if (MarcasSelecionadas.Contains(marca))
+        {
+            MarcasSelecionadas.Remove(marca);
+            return;
+        }
+
+        MarcasSelecionadas.Add(marca);
+
     }
 
     List<Veiculo> VeiculosFake = new()
@@ -396,6 +432,7 @@
     AceitaUsado = true,
     TipoDeVeiculo = "carro",
     Cambio = "Manual",
+    Combustivel = "Gasolina",
     EstadoBloqueado = new List<string>
     {
         "Amazonas",
@@ -414,6 +451,7 @@ new Veiculo
     AceitaUsado = true,
     TipoDeVeiculo = "carro",
     Cambio = "Automatico",
+    Combustivel = "Gasolina",
     EstadoBloqueado = new List<string>
     {
         "Maranhão",
@@ -432,6 +470,7 @@ new Veiculo
     AceitaUsado = false,
     TipoDeVeiculo = "carro",
     Cambio = "Manual",
+    Combustivel = "Hibrido",
     EstadoBloqueado = new List<string>
     {
         "Pará",
@@ -449,6 +488,7 @@ new Veiculo
     AceitaUsado = false,
     TipoDeVeiculo = "carro",
     Cambio = "Automatico",
+    Combustivel = "Eletrico",
     EstadoBloqueado = new List<string>
     {
         "Amazonas",
@@ -469,6 +509,7 @@ new Veiculo
     AceitaUsado = true,
     TipoDeVeiculo = "moto",
     Cambio = "Manual",
+    Combustivel = "Hibrido",
     EstadoBloqueado = new List<string>
     {
         "Maranhão",
@@ -486,6 +527,7 @@ new Veiculo
     AceitaUsado = true,
     TipoDeVeiculo = "moto",
     Cambio = "Manual",
+    Combustivel = "Hibrido",
     EstadoBloqueado = new List<string>
     {
         "Pará",
@@ -503,6 +545,7 @@ new Veiculo
     AceitaUsado = false,
     TipoDeVeiculo = "moto",
     Cambio = "Manual",
+    Combustivel = "Eletrico",
     EstadoBloqueado = new List<string>
     {
         "Amapá",
@@ -522,6 +565,7 @@ new Veiculo
     AceitaUsado = true,
     TipoDeVeiculo = "scooter",
     Cambio = "Automatico",
+    Combustivel = "Eletrico",
     EstadoBloqueado = new List<string>
     {
         "Amazonas",
@@ -539,6 +583,7 @@ new Veiculo
     AceitaUsado = true,
     TipoDeVeiculo = "scooter",
     Cambio = "Automatico",
+    Combustivel = "Eletrico",
     EstadoBloqueado = new List<string>
     {
         "Maranhão",
@@ -556,6 +601,7 @@ new Veiculo
     AceitaUsado = false,
     TipoDeVeiculo = "scooter",
     Cambio = "Automatico",
+    Combustivel = "Eletrico",
     EstadoBloqueado = new List<string>
     {
         "Pará",
@@ -565,7 +611,5 @@ new Veiculo
 }
 
     };
-
-
 
 }
