@@ -14,6 +14,7 @@
 
     public class Veiculo
     {
+        public int Id { get; set; }
         public string Modelo { get; set; }
         public string Marca { get; set; }
         public int Ano { get; set; }
@@ -24,6 +25,7 @@
         public string TipoDeVeiculo { get; set; }
         public string Combustivel { get; set; }
         public string Cambio { get; set; }
+        public string EstadoOrigem { get; set; }
         public List<string> EstadoBloqueado { get; set; }
     }
 

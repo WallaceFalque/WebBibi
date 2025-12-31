@@ -97,7 +97,7 @@
                             border: none;
                             border-radius: 10px;"
                                 @onclick='() => IntervaloDeValor(valorMinimoInput, valorMaximoInput)'>
-                            Aplicar Filtros
+                            Aplicar Filtro
                         </button>
 
                     </div>
@@ -319,7 +319,7 @@
         tipoVeiculo = tipo;
     }
 
-    // Filtro por estado
+    // Filtro por Estado
     List<string> estados = new()
     {
         "Acre",
@@ -386,6 +386,12 @@
     // Filtro de preço
     void IntervaloDeValor(decimal min, decimal max)
     {
+        if (max == 0)
+        {
+            valorMinimo = min;
+            valorMaximo = 99999999999999;
+            return;
+        }
         valorMinimo = min;
         valorMaximo = max;
     }
