@@ -1,74 +1,64 @@
 ﻿@rendermode InteractiveServer
 
-<style>
-    .ImgNovosControl {
-        max-width: 26em;
-        height: auto;
-    }  
-</style>
-
-<section class="card-veiculo bg-white rounded-5 shadow-sm overflow-hidden">
-
-    <img src="@Veiculo.ImagemUrl" class="d-fle ImgNovosControl mx-auto" alt="@Veiculo.Titulo">
+<section class="card-veiculo-luxury shadow-lg overflow-hidden h-100">
+    
+    <div class="img-container">
+        <img src="@Veiculo.ImagemUrl" class="ImgNovosControl" alt="@Veiculo.Titulo">
+    </div>
 
     <div class="p-4">
-
-        <div class="d-flex justify-content-between align-items-start mb-2">
+        <div class="d-flex justify-content-between align-items-start mb-3">
             <div>
-                <h2 class="h7 fw-semibold mb-0">
+                <h2 class="h8 fw-bold mb-1 text-white text-uppercase">
                     @Veiculo.Titulo
                 </h2>
- 
-                <span class="h10 text-muted d-block">
+                <span class="h11 text-muted d-block text-uppercase" style="letter-spacing: 1px;">
                     @Veiculo.Versao
-                </span>
-
-                <span class="h11 text-muted d-block">
-                    @Veiculo.Cambio
                 </span>
             </div>
 
-            <a href="#" @onclick="BtnClicado" class="text-decoration-none">
+            <a href="javascript:void(0)" @onclick="BtnClicado" class="text-decoration-none">
                 @if (!isClicked)
                 {
-                    <i class="bi bi-heart fs-4" style="color: var(--roxo);"></i>
+                    <i class="bi bi-heart fs-5 text-muted hover-roxo"></i>
                 }        
                 else
                 {
-                    <i class="bi bi-suit-heart-fill fs-4" style="color: var(--roxo);"></i>
+                    <i class="bi bi-heart-fill fs-5" style="color: var(--roxo-glow);"></i>
                 }
             </a>
         </div>
 
-        <hr>
-
-        <div class="h7 fw-semibold mb-1">
-            @Veiculo.Preco
+        <div class="d-flex gap-3 mb-3">
+            <span class="h12 badge rounded-0 px-2 py-1" style="background: rgba(255,255,255,0.05); color: var(--text-gray);">
+                <i class="bi bi-calendar3 me-1"></i> @Veiculo.Ano
+            </span>
+            <span class="h12 badge rounded-0 px-2 py-1" style="background: rgba(255,255,255,0.05); color: var(--text-gray);">
+                <i class="bi bi-speedometer2 me-1"></i> @Veiculo.Quilometragem
+            </span>
         </div>
 
-        <div class="d-flex justify-content-between mb-1">
-            <span class="h11 text-muted">@Veiculo.Ano</span>
-            <span class="h11 text-muted">@Veiculo.Quilometragem</span>
+        <div class="price-tag fw-bold mb-1">
+            <span class="h11 fw-light text-muted">R$</span> @Veiculo.Preco
         </div>
 
-        <div class="h11 text-muted mb-3">
-            @Veiculo.Localizacao
+        <div class="h12 text-muted mb-4">
+            <i class="bi bi-geo-alt me-1"></i> @Veiculo.Localizacao
         </div>
 
         <div class="d-flex gap-2">
-            <a class="btn btn-outline-success w-50 rounded-pill h11 fw-semibold">
-                whatsapp
+            <a class="btn btn-wpp-dark w-50 rounded-0 h11 fw-bold text-uppercase py-2">
+                <i class="bi bi-whatsapp me-1"></i> Contato
             </a>
 
-            <a class="btn w-50 rounded-pill h11 fw-semibold text-white" style="background-color: var(--roxo);">
-                simular
+            <a class="btn btn-roxo w-50 rounded-0 h11 fw-bold text-uppercase py-2">
+                Simular
             </a>
         </div>
     </div>
 </section>
 
 @code {
-
     [Parameter, EditorRequired]
     public VeiculoCardDTO Veiculo { get; set; } = default!;
 
@@ -77,4 +67,6 @@
     public void BtnClicado() {
         isClicked = !isClicked;
     }
+}
+
 }

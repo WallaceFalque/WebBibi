@@ -1,161 +1,324 @@
 :root {
-    /* Cor de destaque (roxo Premium) */
+    /* Cores de Destaque */
     --roxo: #38208C;
-    /* Tons de cinza */
-    --cinza-claro: #BFBFBF;
+    --roxo-glow: #5a32e6;
+    /* Tons Escuros Luxuosos */
+    --bg-dark: #0f0f0f; /* Fundo principal */
+    --bg-card: #1a1a1a; /* Fundo dos cards */
+    --bg-input: #252525;
+    /* Cores de Texto */
+    --text-white: #f8f9fa;
+    --text-gray: #b0b0b0;
     --cinza-medio: #737373;
-    --cinza-escuro: #404040;
-    /* Azul / Primary do Bootstrap */
-    --primary: #0d6efd;
-    /* Fonte principal do site */
+    /* Tipografia */
     --font-base: 'Poppins', sans-serif;
-    /* Fontes alternativas */
-    --font-titles: 'Poppins', sans-serif;
-    /* Tamanhos padrão */
-    --font-size-base: 1rem;
-    --font-size-title: 2rem;
-    /* H`s a mais*/
-    /*Definição*/
+    /* Tamanhos padrão (H7-H12 mantidos como solicitado) */
     --h7: 1rem;
     --h8: .95rem;
     --h9: .9rem;
     --h10: .85rem;
     --h11: .8rem;
     --h12: .75rem;
-    /*Atribuição*/
-    .h7 {
-        font-size: var(--h7);
-    }
-
-    .h8 {
-        font-size: var(--h8);
-    }
-
-    .h9 {
-        font-size: var(--h9);
-    }
-
-    .h10 {
-        font-size: var(--h10);
-    }
-
-    .h11 {
-        font-size: var(--h11);
-    }
-
-    .h12 {
-        font-size: var(--h12);
-    }
 }
 
+/* Base do Site */
 body {
-    /* Cinza claro para contraste com cards brancos */
-    background-color: #E0E0E0;
-    /* Fonte padrão aplicada ao site todo */
+    background-color: var(--bg-dark);
+    color: var(--text-white);
     font-family: var(--font-base);
-    font-size: var(--font-size-base);
+    overflow-x: hidden;
+    margin: 0;
 }
 
-.QuebraTela {
-    padding-top: 4em;
+/* Atribuição de tamanhos H */
+.h7 {
+    font-size: var(--h7);
 }
 
-@media (max-width: 768px) {
-    ImgCarroseu {
-        height: 60vh;
+.h8 {
+    font-size: var(--h8);
+}
+
+.h9 {
+    font-size: var(--h9);
+}
+
+.h10 {
+    font-size: var(--h10);
+}
+
+.h11 {
+    font-size: var(--h11);
+}
+
+.h12 {
+    font-size: var(--h12);
+}
+
+/* --- HERO & CARROSSEL --- */
+.hero-img {
+    height: 85vh;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.6); /* Escurece a foto para o texto saltar */
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--bg-dark) 5%, rgba(0,0,0,0) 60%);
+}
+
+.carousel-caption {
+    z-index: 10;
+    text-align: left;
+    bottom: 10%;
+}
+
+/* --- CARDS MODERNOS (DARK GLASS) --- */
+.card-dark {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0px; /* Bordas retas passam mais seriedade/luxo */
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+    .card-dark:hover {
+        transform: translateY(-10px);
+        border-color: var(--roxo);
+        box-shadow: 0 10px 30px rgba(56, 32, 140, 0.3);
     }
+
+/* --- BOTÕES --- */
+/* Botão Principal Roxo */
+.btn-roxo {
+    background-color: var(--roxo);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
-/*Filtro busca avulso*/
+    .btn-roxo:hover {
+        background-color: var(--roxo-glow);
+        box-shadow: 0 0 20px var(--roxo);
+        color: white;
+    }
+
+/* Botão Outline (Transparente com borda) */
+.btn-roxo-outline {
+    background: transparent;
+    color: var(--text-white);
+    border: 1px solid var(--roxo);
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+    .btn-roxo-outline:hover {
+        background-color: var(--roxo);
+        color: white !important;
+    }
+
+/* --- FILTROS (Tema Escuro) --- */
 .filter-card {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.1);
     padding: 1.5rem;
 }
 
 .filter-title {
+    color: var(--roxo-glow);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    color: #6c757d;
-    margin-bottom: 1rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
 }
-
-.btn-toggle-group {
-    background-color: #f8f9fa;
-    padding: 4px;
-    border-radius: 10px;
-    display: flex;
-}
-
-.btn-toggle {
-    border: none;
-    flex: 1;
-    padding: 8px;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background: transparent;
-}
-
-    .btn-toggle.active {
-        background-color: var(--roxo);
-        color: white;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
 
 .custom-input {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background-color: var(--bg-input);
+    border: 1px solid #333;
+    color: white;
     padding: 10px;
-    font-size: 0.9rem;
 }
 
+    .custom-input:focus {
+        background-color: #333;
+        border-color: var(--roxo);
+        color: white;
+        outline: none;
+    }
+
+/* Ajustes Bootstrap */
+.text-muted {
+    color: var(--text-gray) !important;
+}
+
+.card-veiculo-luxury {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+}
+
+    .card-veiculo-luxury:hover {
+        border-color: var(--roxo);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+.img-container {
+    overflow: hidden;
+    background: #000; /* Fundo preto para imagens com transparência */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ImgNovosControl {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    opacity: 0.9;
+}
+
+.card-veiculo-luxury:hover .ImgNovosControl {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+.price-tag {
+    color: var(--text-white);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+/* Botão Whatsapp customizado para não quebrar o luxo com verde vibrante */
+.btn-wpp-dark {
+    border: 1px solid #25d366;
+    color: #25d366;
+    background: transparent;
+    transition: 0.3s;
+}
+
+    .btn-wpp-dark:hover {
+        background: #25d366;
+        color: #000 !important;
+    }
+
+/* Container do Filtro */
+.filter-card {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    color: white;
+}
+
+/* Títulos internos do filtro */
+.filter-title {
+    color: var(--roxo-glow);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+}
+
+/* Grid para as marcas não ficarem em uma lista infinita */
 .brand-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 5px;
+    max-height: 250px;
+    overflow-y: auto;
 }
 
-.form-check-label {
-    font-size: 0.9rem;
-    cursor: pointer;
+/* Estilo dos Inputs e Selects */
+.custom-input {
+    background-color: #0f0f0f !important;
+    border: 1px solid #333 !important;
+    color: white !important;
+    border-radius: 0px !important;
 }
 
-/*troca cor quando passa o mouse pra roxo */
-.btn-outline-primary {
-    color: var(--roxo);
-    border-color: var(--roxo);
-} 
-    .btn-outline-primary:hover {
-        background-color: var(--roxo);
+.form-check-input:checked {
+    background-color: var(--roxo) !important;
+    border-color: var(--roxo) !important;
+}
+
+/* Card de Listagem Premium */
+.card-premium {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: white;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .card-premium:hover {
+        transform: translateY(-5px);
         border-color: var(--roxo);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-/*Butão roxo card avulso*/
-.btn-roxo-outline:hover {
-    background-color: var(--roxo);
-    color: white !important;
-    border-color: var(--roxo);
+/* Badge de Venda/Oferta */
+.badge-status {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.btn-roxo-outline {
-    transition: background-color 0.2s ease, color 0.2s ease;
+/* Imagem */
+.img-card-container {
+    height: 18vh;
+    overflow: hidden;
+    background: #000;
 }
 
-/*Radio btn roxo*/
-.form-check-input:checked {
-    background-color: var(--roxo);
-    border-color: var(--roxo);
+    .img-card-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.9;
+        transition: 0.5s;
+    }
+
+.card-premium:hover .img-card-container img {
+    opacity: 1;
+    transform: scale(1.05);
 }
 
-.form-check-input:focus {
-    border-color: var(--roxo);
-    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.25); 
+/* Tipografia */
+.text-roxo-light {
+    color: var(--roxo-glow) !important;
 }
 
-.form-check-input:checked:focus {
-    box-shadow: 0 0 0 0.2rem rgba(128, 0, 128, 0.35);
+.price-box {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    padding: 10px;
 }
+
+/* Container fixo para manter a simetria */
+.troca-status-container {
+    height: 24px; /* Altura suficiente para uma linha de texto */
+    margin-bottom: 1rem; /* Espaçamento antes dos botões */
+    display: flex;
+    align-items: center;
+}
+
+.text-success-premium {
+    color: #28a745;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+

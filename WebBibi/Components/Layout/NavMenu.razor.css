@@ -1,44 +1,90 @@
-/* Mobile – empurra menu e hambúrguer totalmente para a direita */
-@media (max-width: 992px) {
-    .nav-mobile-control {
-        justify-content: end !important;
-        text-align: right;
-    }
-
-    /* Empurra o botão hamburguer pra direita também */
-    .navbar-toggler {
-        margin-left: auto;
-    }
+/* --- ESTILO NAVBAR LUXURY --- */
+.navbar {
+    background-color: rgba(15, 15, 15, 0.95) !important; /* Quase preto com leve transparência */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    border-bottom: 1px solid rgba(56, 32, 140, 0.2); /* Linha fina roxa no fundo */
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 992px) {
-    /* Dropdown ocupando a tela inteira no mobile */
-    .navbar .dropdown-menu {
-        position: static !important;
-        width: 100vw !important; 
-        left: 0 !important;
-        transform: none !important; 
-        border-radius: 0 !important; 
-        border: none !important;
-    }
+.navbar-brand {
+    font-family: var(--font-base);
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-white) !important;
+    text-transform: uppercase;
 }
 
-/*Espaçamento entre os itens*/
+.nav-link {
+    color: var(--text-gray) !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease !important;
+}
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--roxo-glow) !important;
+    }
+
+/* Efeito de linha subindo no hover */
+.nav-item {
+    position: relative;
+}
+
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 50%;
+        background-color: var(--roxo-glow);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after {
+        width: 60%;
+    }
+
+/* Dropdown Customizado */
+.dropdown-menu {
+    background-color: var(--bg-card) !important;
+    border: 1px solid rgba(56, 32, 140, 0.3) !important;
+    border-radius: 0; /* Luxo usa bordas retas */
+    margin-top: 10px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
 .dropdown-item {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    color: var(--text-gray) !important;
+    font-size: 0.85rem;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease;
 }
 
-
-/*Alinhador dropdown*/
-.dropdown-menu .dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-    .dropdown-menu .dropdown-item i {
-        width: 28px; 
-        text-align: center; 
+    .dropdown-item i {
+        margin-right: 10px;
+        color: var(--roxo);
+        width: 20px;
+        text-align: center;
     }
 
+    .dropdown-item:hover {
+        background-color: var(--roxo) !important;
+        color: white !important;
+    }
+
+        .dropdown-item:hover i {
+            color: white;
+        }
+
+/* Botão Mobile */
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1); /* Deixa o ícone do hambúrguer branco */
+}

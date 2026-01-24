@@ -4,377 +4,68 @@
 
 <PageTitle>Home</PageTitle>
 
-@* Carroseu *@
-<div id="carouselHero"
-     class="carousel slide"
-     data-bs-ride="carousel"
-     data-bs-interval="5000"
-     data-bs-pause="false">
-
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-
         <div class="carousel-item active">
-            <img class="w-100 ImgCarroseu"
-                 style="height: 85vh; object-fit: cover;"
-                 src="https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg">
-            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
-                <h1 class="fw-bold display-4 mb-3">Performance e luxo</h1>
-                <p class="h8 mb-4">Veículos selecionados para quem exige mais.</p>
-                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Descobrir lançamentos</button>
-            </div>
-
-        </div>
-
-        <div class="carousel-item">
-            <img class="w-100 ImgCarroseu"
-                 style="height: 85vh; object-fit: cover;"
-                 src="https://images.pexels.com/photos/3972753/pexels-photo-3972753.jpeg">
-            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
-                <h1 class="fw-bold display-4 mb-3">Precisão que você sente</h1>
-                <p class="h8 mb-4">Engenharia, conforto e resposta imediata.Engenharia, conforto e resposta imediata.</p>
-                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Conhecer os diferenciais</button>
-            </div>
-
-        </div>
-
-        <div class="carousel-item">
-            <img class="w-100 ImgCarroseu"
-                 style="height: 85vh; object-fit: cover;"
-                 src="https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg">
-            <div class="carousel-caption text-start d-flex flex-column" style="bottom:4em;">
-                <h1 class="fw-bold display-4 mb-3">Seu próximo destino começa aqui</h1>
-                <p class="h8 mb-4">Mais do que um carro, uma experiência.</p>
-                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolde px-4 col-md-4 col-sm-6 py-3">Ver modelos disponíveis</button>
+            <img src="https://images.pexels.com/photos/3752194/pexels-photo-3752194.jpeg" class="hero-img">
+            <div class="hero-overlay"></div>
+            <div class="carousel-caption container">
+                <h5 class="text-uppercase" style="color: var(--roxo-glow); letter-spacing: 3px;">Coleção Exclusiva</h5>
+                <h1 class="display-3 fw-bold mb-4">Sinta a Experiência</h1>
+                <button class="btn btn-roxo">Ver Estoque</button>
             </div>
         </div>
-        <div class="carousel-item">
-            <img class="w-100 ImgCarroseu"
-                 style="height: 85vh; object-fit: cover;"
-                 src="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg">
-            <div class="carousel-caption text-start d-flex flex-column" style="top:10em;">
-                <h1 class="fw-bold display-4 mb-3">O luxo não chama atenção. Ele se impõe.</h1>
-                <p class="h8 mb-4">Design, conforto e presença em cada escolha.</p>
-                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Conhecer a linha premium</button>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="w-100 ImgCarroseu"
-                 style="height: 85vh; object-fit: cover;"
-                 src="https://images.pexels.com/photos/634692/pexels-photo-634692.jpeg">
-            <div class="carousel-caption text-start d-flex flex-column" style="top:6em; left:4em;">
-                <h1 class="fw-bold display-4 mb-3">Comece o ano de 2026 com estilo.</h1>
-                <p class="h8 mb-4">Promoção de fim de ano.</p>
-                <button type="button" class="btn btn-outline-light btn-lg rounded-pill fw-bolder px-4 col-md-4 col-sm-6 py-3">Conferir promoçõs</button>
-            </div>
-        </div>
-
     </div>
 </div>
 
-<section class="QuebraTela"></section>
+<div class="container py-5">
 
-@* Cards *@
-
-
-@* Conteudo da pagina *@
-<section class="mx-auto" style="width:95%;">
-
-    @* Card top *@
-    <section class="my-5 py-4">
-
-        <!-- Título -->
-        <div class="container mb-4">
-            <h1 class="fw-semibold text-center" style="color: var(--roxo); font-size: 2.6rem;">
-                O carro certo para o seu próximo passo
-            </h1>
+    <div class="row align-items-center mb-5 py-5">
+        <div class="col-md-6">
+            <h2 class="display-5 fw-bold mb-4">Redefinindo o <span style="color: var(--roxo-glow)">Padrão.</span></h2>
+            <p class="text-muted fs-5">Não entregamos apenas veículos, entregamos conquistas. Cada detalhe do nosso estoque é selecionado para quem busca perfeição.</p>
         </div>
-
-        <!-- Imagem ampla e discreta -->
-        <div class="container-fluid px-3 px-lg-5 mb-4">
-            <div class="overflow-hidden rounded-4">
-                <img src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg"
-                     class="w-100"
-                     style="height: 75vh; object-fit: cover;"
-                     alt="Apresentação do site"
-                     loading="lazy" />
-            </div>
+        <div class="col-md-6">
+            <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg" class="img-fluid" style="border-left: 5px solid var(--roxo);">
         </div>
+    </div>
 
-        <!-- Texto -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 text-end">
-
-                    <p class="text-muted fs-6 mb-2">
-                        Veículos 0 km, condições especiais e um processo de compra simples e transparente.
-                    </p>
-
-                    <p class="text-muted fs-6 mb-0">
-                        Tudo pensado para você escolher com segurança e tranquilidade.
-                    </p>
-
-                </div>
-            </div>
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h3 class="mb-0">Destaques</h3>
+            <div style="width: 50px; height: 3px; background: var(--roxo); margin-top: 10px;"></div>
         </div>
+        <a href="#" class="btn-roxo-outline h10">Ver Todos</a>
+    </div>
 
-    </section>
-
-    @*  Acabaram de chegar *@
-    <div class="container my-5">
-
-        <h4 class="pb-4" style="color: var(--roxo);">
-            Acabaram de chegar
-        </h4>
-
-        <div class="row justify-content-center g-5">
-
-            @foreach (var veiculo in VeiculosFake)
-            {
-                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+    <div class="row g-4">
+        @foreach (var veiculo in VeiculosFake)
+        {
+            <div class="col-md-4">
+                <div class="card-dark h-100">
                     <CardNovosItens Veiculo="veiculo" />
                 </div>
-            }
+            </div>
+        }
+    </div>
 
+    <div class="my-5 p-5 text-center" style="background: linear-gradient(45deg, #1a1a1a, #000); border: 1px solid var(--roxo);">
+        <h2 class="fw-bold mb-3">Simulador de Crédito</h2>
+        <p class="text-muted mb-4">Taxas exclusivas para o segmento premium. Resposta em até 24h.</p>
+        <a href="/simulador" class="btn btn-roxo">Simular Agora</a>
+    </div>
+
+    <div class="py-5 text-center opacity-50">
+        <div class="d-flex justify-content-around flex-wrap gap-4">
+            <h4 class="fw-bold">BMW</h4>
+            <h4 class="fw-bold">PORSCHE</h4>
+            <h4 class="fw-bold">AUDI</h4>
+            <h4 class="fw-bold">MERCEDES</h4>
+            <h4 class="fw-bold">LAND ROVER</h4>
         </div>
     </div>
 
-    @* Simulador de calculadora (Isso vai ser só uma tag a pra direcionar pra pagina de sumulação) *@
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-
-                <a href="/simulador-financiamento" class="text-decoration-none">
-                    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-
-                        <div class="card-body p-5 text-center">
-
-                            <div class="mb-3">
-                                <i class="bi bi-calculator fs-1" style="color: var(--roxo);"></i>
-                            </div>
-
-                            <h4 class="fw-bold mb-2" style="color: var(--roxo);">
-                                Simulador de financiamento
-                            </h4>
-
-                            <p class="text-muted mb-4">
-                                Simule de forma rápida e intuitiva as condições ideais para o financiamento do seu veículo.
-                            </p>
-
-                            <buttom class="btn btn-primary px-4 py-2 rounded-pill border-0" style="background-color: var(--roxo); color:white;">
-                                Acessar simulador
-                            </buttom>
-
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-    </div>
-
-    <section class="QuebraTela"></section>
-
-    @* Cards de meio #1 *@  
-          <div class="container bg-white shadow-sm p-4 rounded-2">
-        <div class="row align-items-center gx-5 gy-4">
-
-            <div class="col-12 col-lg-6 text-center text-lg-start">
-
-                <h3 class="fw-bolder mb-4" style="color: var(--roxo);">
-                    Ofertas para você sair daqui hoje com seu carro 0 km
-                </h3>
-
-                <ul class="ps-3 mb-0">
-                    <li class="mb-3">
-                        <p class="text-muted fs-5 mb-0">
-                            Condições exclusivas, aprovação rápida e veículos 0 km prontos para entrega imediata.
-                        </p>
-                    </li>
-
-                    <li class="mb-3">
-                        <p class="text-muted fs-5 mb-0">
-                            Entrega garantida para todas as regiões do Brasil, com transporte assegurado e seguro de cortesia.
-                        </p>
-                    </li>
-
-                    <li>
-                        <p class="text-muted fs-5 mb-0">
-                            Atendimento especializado do início ao pós-venda, com total transparência em cada etapa da compra.
-                        </p>
-                    </li>
-                </ul>
-
-                @* vai pra sobre nos *@
-                <p class="pt-5">
-                    <a href="" style="color:var(--roxo);">
-                        Saiba mais <i class="bi bi-arrow-up-right-square px-2"></i>
-                    </a>
-                </p>
-
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <img src="https://images.pexels.com/photos/326259/pexels-photo-326259.jpeg"
-                     class="img-fluid rounded-4 shadow"
-                     alt="Carro zero quilômetro"
-                     loading="lazy" />
-            </div>
-
-        </div>
-    </div>
-
-
-
-    @* Cards de meio #2 *@
-    <div class="container my-5 py-5 bg-white shadow-sm p-4 rounded-2">
-
-        <div class="row align-items-center gx-5 gy-4">
-
-            <div class="col-12 col-lg-6 text-center text-lg-start">
-                <img src="https://images.pexels.com/photos/9331954/pexels-photo-9331954.jpeg"
-                     class="img-fluid rounded-4 shadow"
-                     alt="Carro zero quilômetro"
-                     loading="lazy" />
-            </div>
-
-            <div class="col-12 col-lg-6">
-
-                <h3 class="fw-bolder mb-4" style="color: var(--roxo);">
-                    Pensando em você
-                </h3>
-
-                <ul class="ps-3 mb-0">
-                    <li class="mb-3">
-                        <p class="text-muted fs-5 mb-0">
-                            Temos um carro certo para a sua necessidade.
-                        </p>
-                    </li>
-
-                    <li class="mb-3">
-                        <p class="text-muted fs-5 mb-0">
-                            Saiba mais sobre as vendas diretas e conheça as melhores opções de modelos para todos os segmentos: PcD, Táxi, Autoescola, Produtor Rural, CNPJ e muito mais.
-                        </p>
-                    </li>
-
-                    <li>
-                        <p class="text-muted fs-5 mb-0">
-                            Válido tanto para você quanto para o seu negócio.
-                        </p>
-                    </li>
-                </ul>
-
-                @* vai pra LGPD *@
-                <p class="pt-5">
-                    <a href="" style="color:var(--roxo);">
-                        Saiba mais <i class="bi bi-arrow-up-right-square px-2"></i>
-                    </a>
-                </p>
-
-            </div>
-
-        </div>
-    </div>
-
-    <section class="QuebraTela"></section>
-
-    @* Nossas marcas *@
-    @* Futuramente fazer a pagina de ficha com filtro pra cada marca *@  
-<section class="w-75 w-sm-100 mx-auto">
-        <h4 class="pb-5" style="color: var(--roxo)">Algumas das marcas que trabalhamos</h4>
-        <div id="logosCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <div class="row text-center justify-content-center g-4">
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/200" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Ferrari</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/201" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">BMW</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/202" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Audi</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/203" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Lexus</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/204" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Mercedes</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/205" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Porsche</h6>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="row text-center justify-content-center g-4">
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/210" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);" v>Toyota</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/211" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Honda</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/212" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Nissan</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/213" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);" v>Volvo</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/214" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Kia</h6>
-                        </div>
-
-                        <div class="col-6 col-sm-4 col-md-2">
-                            <img src="https://picsum.photos/215" class="img-fluid rounded-circle border border-secondary p-1">
-                            <h6 class="fw-bold mt-2" style="color: var(--roxo);">Hyundai</h6>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#logosCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#logosCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
-
-        </div>
-
-    </section>
-
-    <section class="QuebraTela"></section>
-
-</section>
+</div>
 @code {
     private List<VeiculoCardDTO> VeiculosFake = new();
 

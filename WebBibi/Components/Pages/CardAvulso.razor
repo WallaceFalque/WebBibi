@@ -1,76 +1,73 @@
-﻿
-<div class="card m-2 w-100 rounded-2">
+﻿<div class="card-premium shadow-sm w-100 position-relative">
 
-    @if (veiculo.EhOferta)
-    {
-        <h5 class="text-white text-center p-2 mb-0"
-            style="background-color:var(--roxo);">
-            Oferta especial
-        </h5>
-    } else
-    {
-        <h5 class="text-white text-center p-2 mb-0"
-            style="background-color:var(--roxo);">
-            Venda
-        </h5>
-    }
-
-    <img src="@veiculo.ImagemUrl"
-         class="card-img-top"
-         alt="@veiculo.Modelo"
-        style="height:18vh;">
-
-    <div class="card-body">
-
-        <h3 class="card-title mb-1">@veiculo.Modelo</h3>
-        <small class="text-muted">
-            @veiculo.Marca • @veiculo.Ano
-        </small>
-
-        <hr class="my-3">
-
-        <div class="mb-2">
-            <p class="mb-1">Entrada a partir de</p>
-            <h2 class="fw-bolder mb-0" style="color:var(--roxo);">
-                @CalcularEntrada(veiculo.Preco).ToString("C")
-            </h2>
-        </div>
-
-        <small class="text-muted">
-            Parcelas em até 36x de
-            <strong>
-                @CalcularParcela(veiculo.Preco).ToString("C")
-            </strong>
-        </small>   
-        
-        <br>
-
-        <small class="text-muted">
-            Total de R$
-            <strong>
-                @veiculo.Preco.ToString("C")
-            </strong>
-        </small>
-
-        @if (veiculo.AceitaUsado)
+    @* Badge de Status *@
+    <div class="badge-status text-white text-center p-2"
+         style="background-color: var(--roxo);">
+        @if (veiculo.EhOferta)
         {
-            <p class="pt-3 mb-0">
-                ✔ Aceitamos seu usado na troca
-            </p>
+            <span><i class="bi bi-lightning-fill me-1"></i> Oferta especial</span>
+        }
+        else
+        {
+            <span>Venda Especial</span>
         }
     </div>
 
-    <div class="row justify-content-center p-2 pb-4 gap-2">
-        <a class="col-10 btn btn-outline-primary btn-roxo-outline"
-           style="color:var(--roxo); border-color:var(--roxo);">
-            Entrar em contato
-        </a>
-
-        <a class="col-10 btn btn-outline-success">
-            <i class="bi bi-whatsapp"></i> Contato via WhatsApp
-        </a>
+    @* Container da Imagem *@
+    <div class="img-card-container">
+        <img src="@veiculo.ImagemUrl" alt="@veiculo.Modelo">
     </div>
 
+    <div class="p-3">
+        @* Título e Marca *@
+        <div class="mb-3">
+            <h3 class="h9 fw-bold mb-0 text-white text-uppercase">@veiculo.Modelo</h3>
+            <span class="h11 text-muted">
+                @veiculo.Marca • @veiculo.Ano
+            </span>
+        </div>
+
+        @* Caixa de Preço e Financiamento *@
+        <div class="price-box border border-secondary mb-3">
+            <p class="h12 text-muted mb-1 text-uppercase">Entrada a partir de</p>
+            <h2 class="h7 fw-bolder mb-0 text-roxo-light">
+                @CalcularEntrada(veiculo.Preco).ToString("C")
+            </h2>
+
+            <div class="mt-2 pt-2 border-top border-secondary">
+                <p class="h12 mb-0 text-muted">
+                    36x de <strong class="text-white">@CalcularParcela(veiculo.Preco).ToString("C")</strong>
+                </p>
+                <p class="h12 mb-0 text-muted">
+                    Total: <span class="text-white-50">@veiculo.Preco.ToString("C")</span>
+                </p>
+            </div>
+        </div>
+
+        @* Espaço Reservado para Troca (Mantém a Simetria) *@
+        <div class="troca-status-container">
+            @if (veiculo.AceitaUsado)
+            {
+                <div class="text-success-premium">
+                    <i class="bi bi-check2-circle me-1"></i>
+                    Aceitamos seu usado na troca
+                </div>
+            }
+            @* Se não aceitar, a div troca-status-container continua aqui vazia, 
+               segurando o espaço para os botões não subirem *@
+        </div>
+
+        @* Botões de Ação *@
+        <div class="d-grid gap-2">
+            <a class="btn btn-roxo-outline btn-sm py-2 fw-bold text-uppercase" style="font-size: 0.7rem;">
+                Entrar em contato
+            </a>
+
+            <a class="btn btn-outline-success btn-sm py-2 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2" style="font-size: 0.7rem;">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
 </div>
 
 

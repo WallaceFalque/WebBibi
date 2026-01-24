@@ -1,44 +1,51 @@
-﻿<nav class="navbar navbar-expand-lg bg-body-tertiary p-3">
-    <div class="container-fluid d-flex justify-content-center">
-        <a class="navbar-brand" href="#">Navbar</a>
+﻿<nav class="navbar navbar-expand-lg sticky-top p-3">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <span style="color: var(--roxo-glow);">Nav</span> Bar
+        </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse nav-mobile-control" id="navbarNavDropdown">
-            <ul class="navbar-nav justify-content-center w-100 gap-4">                
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto gap-lg-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Comprar
                     </a>
-                    <ul class="dropdown-menu text-center smooth-dropdown fs-6">                        
-                        <li><a class="dropdown-item" href="/BuscaAvulso"><i class="fa-solid fa-car fs-6"></i>Carros</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-motorcycle fs-5"></i>Moto</a></li>                        
-                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bicycle fs-5"></i>Scooter</a></li>                      
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-stars fs-5"></i>Lançamento</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/BuscaAvulso"><i class="fa-solid fa-car"></i> Carros</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-motorcycle"></i> Motos</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bicycle"></i> Scooters</a></li>
+                        <li><hr class="dropdown-divider" style="border-color: rgba(255,255,255,0.1)"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-stars"></i> Lançamentos 2026</a></li>
                     </ul>
+                </li>
 
-                </li>               
                 <li class="nav-item dropdown">
-                    <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Serviços
                     </a>
-                    <ul class="dropdown-menu active">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-check-fill fs-6"></i>Contratados</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-excel-fill fs-6"></i>Novo Contrato</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle-fill fs-6"></i>Aluguel</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-check-fill"></i> Contratos</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-excel-fill"></i> Novo Contrato</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle-fill"></i> Aluguel de Luxo</a></li>
                     </ul>
-                </li>    
-                
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Premium</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Contato">Contato</a>
+                    <a class="nav-link" href="#">Premium</a>
                 </li>
-               
+
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/trabalhe">Trabalhe com a gente</a>
+                    <a class="nav-link" href="/Contato">Contato</a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-roxo-outline btn-sm px-4" style="font-size: 0.75rem; padding-top: 8px;" href="/trabalhe">
+                        Carreiras
+                    </a>
                 </li>
             </ul>
         </div>
