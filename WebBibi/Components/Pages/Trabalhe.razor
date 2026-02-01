@@ -1,5 +1,4 @@
 ﻿@page "/Trabalhe"
-@using WebBibi.Models;
 
 
 <PageTitle>Trabalhe</PageTitle>
@@ -48,46 +47,24 @@
         </div>
     </div>
 </section>
-<EditForm Model="@meuModelo" OnValidSubmit="EnviarCandidatura" FormName="candidatura" class="row g-4 w-75 mx-auto">
-    <DataAnnotationsValidator />
-
+<form class="row g-4 w-75 mx-auto">
     <div class="col-md-6">
-        <label for="inputname" class="form-label">NOME</label>
-        <InputText id="inputname" class="form-control" @bind-Value="meuModelo.Nome" placeholder="digite seu nome completo" />
+        <label for="inputname" class="form-label">nome</label>
+        <input type="text" class="form-control" id="inputname" placeholder="digite seu nome completo">
     </div>
-
     <div class="col-md-6">
-        <label for="inputnumero" class="form-label">NUMERO</label>
-        <InputText id="inputnumero" class="form-control" @bind-Value="meuModelo.Celular" placeholder="(XX)XXXXX-XXXX" />
-        <ValidationMessage For="@(() => meuModelo.Celular)" class="text-danger" />
+        <label for="inputnumero" class="form-label">numero</label>
+        <input type="tel" class="form-control" id="inputnumero" placeholder="digite o numero com numero de area " pattern="(00) 00000-0000">
     </div>
-
     <div class="col-12">
-        <label for="inputEmail" class="form-label">EMAIL</label>
-        <InputText id="inputEmail" class="form-control" @bind-Value="meuModelo.Email" placeholder="digite seu email" />
-        <ValidationMessage For="@(() => meuModelo.Email)" class="text-danger" />
+        <label for="inputAddress" class="form-label">email</label>
+        <input type="email" class="form-control" id="inputAddress" placeholder="digite seu email">
     </div>
-
     <div class="col-12">
-        <label for="inputcurriculo" class="form-label">CURRICULO</label>
-        <InputFile id="inputcurriculo" class="form-control" />
+        <label for="inputcurriculo" class="form-label">curriculo</label>
+        <input type="file" class="form-control" id="inputcurriculo">
     </div>
-
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Enviar Candidatura</button>
+        <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
-
-</EditForm>
-
-@code {
-
-    [SupplyParameterFromForm]
-
-    public ValidadorModelo meuModelo { get; set; } = new ValidadorModelo();
-
-    private void EnviarCandidatura()
-    {
-     
-        Console.WriteLine("Sucesso!");
-    }
-}
+</form>
