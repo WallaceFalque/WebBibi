@@ -2,35 +2,41 @@
 @rendermode InteractiveServer
 @using WebBibi.Models
 
-<div class="container-fluid search-container">
-    <div class="row mx-auto justify-content-around" style="margin-top:2em; width:100%;">
+@* Conteúdo da página *@
+<div class="container-fluid">
+    <div class="row mx-auto justify-content-around"
+         style="margin-top:2em; width:100%;">
 
         @* FILTRO *@
         <div class="col-md-3 col-lg-2 py-4">
-            <div class="filter-card" style="position: sticky; top: 2rem; height: fit-content;">
+            <div class="filter-card"
+                 style="
+                    position: sticky;
+                    top: 2rem;
+                    height: fit-content;
+                 ">
 
-                <h5 class="text-center mb-4 fw-bold text-uppercase">Filtros</h5>
+                <h5 class="text-center mb-4" style="font-weight: 800;">
+                    Filtros
+                </h5>
 
-                @* Tipo de Veículo - Corrigido *@
+                @* Tipo de Veículo *@
                 <div class="mb-4">
                     <p class="filter-title">Veículo</p>
-                    <div class="btn-toggle-group d-flex border border-secondary p-1" style="background-color: #000; overflow: hidden;">
-                        <button class="btn btn-sm flex-fill rounded-0 border-0 @(ehCarro ? "btn-roxo" : "text-white")"
-                                style="font-size: 0.7rem; font-weight: 700;"
+                    <div class="btn-toggle-group">
+                        <button class="btn-toggle @(ehCarro ? "active" : "")"
                                 @onclick='() => FiltroVeiculo("carro")'>
-                            CARRO
+                            Carro
                         </button>
 
-                        <button class="btn btn-sm flex-fill rounded-0 border-0 @(ehMoto ? "btn-roxo" : "text-white")"
-                                style="font-size: 0.7rem; font-weight: 700;"
+                        <button class="btn-toggle @(ehMoto ? "active" : "")"
                                 @onclick='() => FiltroVeiculo("moto")'>
-                            MOTO
+                            Moto
                         </button>
 
-                        <button class="btn btn-sm flex-fill rounded-0 border-0 @(ehScooter ? "btn-roxo" : "text-white")"
-                                style="font-size: 0.7rem; font-weight: 700;"
+                        <button class="btn-toggle @(ehScooter ? "active" : "")"
                                 @onclick='() => FiltroVeiculo("scooter")'>
-                            SCOOTER
+                            Scooter
                         </button>
                     </div>
                 </div>
@@ -38,20 +44,28 @@
                 @* Localização *@
                 <div class="mb-4">
                     <p class="filter-title">Localização</p>
-                    <input class="form-control custom-input" type="text" placeholder="Ex: Rio de Janeiro..." value="@estadoDigitado" @oninput="AtualizarSugestoes" />
+                    <input class="form-control custom-input"
+                           type="text"
+                           placeholder="Ex: Rio de Janeiro..."
+                           value="@estadoDigitado"
+                           @oninput="AtualizarSugestoes" />
 
                     @if (sugestoes.Any())
                     {
-                        <div class="bg-dark border border-secondary mt-1 shadow-sm position-absolute w-100" style="z-index:1000">
+                        <div class="bg-white border rounded mt-1 shadow-sm">
                             @foreach (var estado in sugestoes)
                             {
-                                <div class="p-2 sugestao-item text-white border-bottom border-secondary" style="cursor:pointer" @onclick="() => SelecionarEstado(estado)">
+                                <div class="p-2 sugestao-item"
+                                     style="cursor:pointer"
+                                     @onclick="() => SelecionarEstado(estado)">
                                     @estado
                                 </div>
                             }
                         </div>
                     }
                 </div>
+
+
 
                 @* Combustível *@
                 <div class="mb-4">
@@ -68,17 +82,26 @@
                 @* Faixa de Preço *@
                 <div class="mb-4">
                     <p class="filter-title">Preço</p>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <input class="form-control custom-input" placeholder="Min" @bind="valorMinimoInput" type="number" />
+                    <div class="d-flex flex-column gap-2">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input class="form-control custom-input" placeholder="Min" @bind="valorMinimoInput" type="number" />
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control custom-input" placeholder="Max" @bind="valorMaximoInput" type="number" />
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input class="form-control custom-input" placeholder="Max" @bind="valorMaximoInput" type="number" />
-                        </div>
+
+                        <button class="btn w-100 mt-2 shadow-sm text-white p-1"
+                                style="background-color: var(--roxo);
+                            border: none;
+                            border-radius: 10px;"
+                                @onclick='() => IntervaloDeValor(valorMinimoInput, valorMaximoInput)'>
+                            Aplicar Filtro
+                        </button>
+
                     </div>
-                    <button class="btn btn-roxo w-100 mt-2 btn-sm fw-bold" @onclick='() => IntervaloDeValor(valorMinimoInput, valorMaximoInput)'>
-                        APLICAR FILTRO
-                    </button>
+
                 </div>
 
                 @* Câmbio *@
@@ -86,50 +109,89 @@
                     <p class="filter-title">Câmbio</p>
                     <div class="d-flex flex-column gap-2 px-1">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="cambio" id="auto" @onclick='() => TipoCambio("Automatico")'>
-                            <label class="form-check-label text-white-50" for="auto">Automático</label>
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cambio"
+                                   id="auto"
+                                   @onclick='() => TipoCambio("Automatico")'>
+                            <label class="form-check-label" for="auto">
+                                Automático
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cambio"
+                                   id="manual"
+                                   checked
+                                   @onclick='() => TipoCambio("Manual")'>
+                            <label class="form-check-label" for="manual">
+                                Manual
+                            </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="cambio" id="manual" @onclick='() => TipoCambio("Manual")'>
-                            <label class="form-check-label text-white-50" for="manual">Manual</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="cambio" id="ambos" checked @onclick='() => TipoCambio("Ambos")'>
-                            <label class="form-check-label text-white-50" for="ambos">Ambos</label>
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="cambio"
+                                   id="manual"
+                                   checked
+                                   @onclick='() => TipoCambio("Ambos")'>
+                            <label class="form-check-label" for="manual">
+                                Ambos
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 @* Marcas *@
                 <div>
-                    <p class="filter-title">Marcas</p>
+                    <p class="filter-title">Marcas Populares</p>
                     <div class="brand-grid">
                         @{
-                            var marcas = new[] { "Todos", "Fiat", "Volkswagen", "Chevrolet", "Ford", "Toyota", "Hyundai", "Renault", "Nissan", "Peugeot", "Citroën", "Honda", "Jeep", "Mitsubishi", "Chery", "BYD", "GM", "Kia", "Subaru", "Suzuki", "BMW", "Volvo" };
+                            var marcas = new[]
+                            {
+                                                "Todos", "Fiat", "Volkswagen", "Chevrolet",
+                                                "Ford", "Toyota","Hyundai", "Renault", "Nissan",
+                                                "Peugeot", "Citroën","Honda", "Jeep", "Mitsubishi",
+                                                "Chery", "BYD", "GM", "Kia", "Subaru", "Suzuki",
+                                                "BMW", "Volvo"
+                                                };
 
                             foreach (var marca in marcas)
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked="@MarcasSelecionadas.Contains(marca)" id="@marca" @onclick='() => EscolhaMarcas(marca)'>
-                                    <label class="form-check-label text-white-50 h12" for="@marca">@marca</label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="radioMarca"
+                                           checked="@MarcasSelecionadas.Contains(marca)"
+                                           id="@marca"
+                                           @onclick='() => EscolhaMarcas(marca)'>                                           
+                                    <label class="form-check-label"
+                                           for="@marca">
+                                        @marca
+                                    </label>
                                 </div>
                             }
                         }
                     </div>
-                </div>
+                </div>              
             </div>
         </div>
 
-        @* ===== GRID DE CARDS ===== *@
-        <div class="col-md-9">
-            <div class="row g-3">
+        @* ===== CARDS ===== *@
+        <div class="col-md-10 col-sm-12 rounded-2">
+            <div class="row g-2">
+
+
                 @foreach (var veiculo in VeiculosFake)
                 {
                     @if (veiculo.TipoDeVeiculo == tipoVeiculo && !veiculo.EstadoBloqueado.Contains(estadoDigitado, StringComparer.OrdinalIgnoreCase))
                     {
                         @if (veiculo.Cambio == cambioTipo || cambioTipo == "Ambos")
                         {
-                            @if ((!valorMinimo.HasValue || veiculo.Preco >= valorMinimo) && (!valorMaximo.HasValue || veiculo.Preco <= valorMaximo))
+                            @if ((!valorMinimo.HasValue || veiculo.Preco >= valorMinimo) &&
+                                            (!valorMaximo.HasValue || veiculo.Preco <= valorMaximo))
                             {
                                 @if (veiculo.Combustivel == tipoCombustivel || tipoCombustivel == "Ambos")
                                 {
@@ -140,12 +202,77 @@
                                         </div>
                                     }
                                 }
+
                             }
+
                         }
                     }
                 }
+
+
             </div>
         </div>
+
+    </div>
+</div>
+
+@* Conteudo fora dos cards *@
+<div class="row py-5 justify-content-center mx-auto">
+    <div class="col-11 col-lg-10 bg-white rounded-3 shadow-sm">
+
+        @* Texto *@
+        <div class="p-4 p-lg-5">
+            <h3 class="fw-bold mb-2">
+                Não encontrou a oferta ideal?
+            </h3>
+
+            <p class="fs-5 text-muted mb-3">
+                Sem problemas. Nossa equipe está pronta para te ajudar a encontrar
+                o veículo perfeito, de forma rápida, segura e sem burocracia.
+            </p>
+
+            <ul class="list-unstyled mb-4">
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Atendimento personalizado
+                </li>
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Simulações de financiamento sob medida
+                </li>
+                <li class="mb-2">
+                    <i class="bi bi-check-circle-fill me-2" style="color:var(--roxo);"></i>
+                    Aceitamos seu usado na troca
+                </li>
+            </ul>
+
+            <hr class="my-4">
+
+            @* Botões *@
+            <div class="row gap-3 justify-content-start">
+
+                <a class="col-12 col-md-4 btn btn-outline-primary btn-roxo-outline
+                           d-flex align-items-center justify-content-center gap-2"
+                   style="color:var(--roxo); border-color:var(--roxo);">
+                    <i class="bi bi-envelope-fill"></i>
+                    Falar com um especialista
+                </a>
+
+                <a class="col-12 col-md-3 btn btn-outline-success
+                           d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-whatsapp"></i>
+                    WhatsApp
+                </a>
+
+                <a class="col-12 col-md-3 btn btn-outline-danger
+                           d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-telephone-fill"></i>
+                    Ligação
+                </a>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
